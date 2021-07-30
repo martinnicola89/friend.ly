@@ -5,7 +5,8 @@ import AuthPage from '../AuthPage/AuthPage';
 import ProfilePage from '../ProfilePage/ProfilePage';
 import ProfilePageForm from '../../components/ProfilePageForm/ProfilePageForm';
 import UserLogOut from '../../components/UserLogOut/UserLogOut';
-import { Link, Route, Switch, Redirect} from 'react-router-dom';
+import DecisionPage from '../DecisionPage/DecisionPage';
+import { Link, Route, Switch} from 'react-router-dom';
 
 export default class App extends React.Component {
 
@@ -66,6 +67,7 @@ export default class App extends React.Component {
             <Route path="/" render={() => (
               <>
                 <h1>Hello</h1>
+                <DecisionPage/>
                 <UserLogOut handleLogOut={this.handleLogOut}/>
               </>
             )}/>

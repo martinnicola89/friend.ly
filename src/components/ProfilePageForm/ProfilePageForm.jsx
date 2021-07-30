@@ -17,7 +17,7 @@ export default class ProfilePageForm extends Component {
 
     try {
       let jwt = localStorage.getItem('token')
-      let fetchResponse = await fetch("/api/users/profile", {
+      await fetch("/api/users/profile", {
         method: "POST",
         headers: {"Content-Type": "application/json",'Authorization': 'Bearer ' + jwt},
         body: JSON.stringify({bio: this.state.bio, interests: this.state.interests, friends: this.state.friends}) // <-- send this object to server

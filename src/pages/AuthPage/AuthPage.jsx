@@ -14,7 +14,7 @@ export default class AuthPage extends React.Component {
       <main className="AuthPage">
         <div>
           <h3 onClick={() => this.setState({ showLogin: !this.state.showLogin })}>
-            {this.state.showLogin ? 'SIGN UP' : 'LOG IN'}
+            {this.state.showLogin ? 'Not a member yet? Sign Up!' : 'Already a member? Log in!'}
           </h3>
         </div>
         {this.state.showLogin ? 
