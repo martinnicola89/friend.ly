@@ -11,7 +11,6 @@ export default class DecisionPage extends React.Component {
         let fetchProfileDataResponse = await fetch('/api/users/profile/decision', {headers: {'Authorization': 'Bearer ' + jwt}})
         if (!fetchProfileDataResponse.ok) throw new Error("Couldn't fetch orders")
         let profile = await fetchProfileDataResponse.json() // <------- convert fetch response into a js object
-        console.log("profile is", profile);
         this.setState({ allUsers: profile})
       }
 
@@ -28,6 +27,7 @@ export default class DecisionPage extends React.Component {
             <div>
                 {this.state.allUsers.map(u => (
                     <>
+                        <h1>{u.name}</h1>
                         <h1>{u.bio}</h1>
                         <h1>{u.interests}</h1>
                         <h1>{u.friends}</h1>

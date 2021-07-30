@@ -46,8 +46,17 @@ export default class App extends React.Component {
       <div className="App">
           <nav>
             <span>
-              <Link to='/'>Home</Link>&nbsp;&nbsp;
-              <Link to='/profile'>Profile</Link>&nbsp;&nbsp;
+              
+              {this.state.user ?
+              <>
+                <Link to='/'>Home</Link>&nbsp;&nbsp;
+                <Link to='/profile'>Profile</Link>&nbsp;&nbsp;
+                <UserLogOut handleLogOut={this.handleLogOut}/>
+              </>
+              :
+                <>
+                </>
+              } 
             </span>
           </nav>
         {this.state.user ?
@@ -55,20 +64,17 @@ export default class App extends React.Component {
             <Route path={'/profile'} render={() => (
               <>
                 <ProfilePage />
-                <UserLogOut handleLogOut={this.handleLogOut}/>
               </>
             )}/>
             <Route path={'/profile/form'} render={() => (
               <>
                 <ProfilePageForm />
-                <UserLogOut handleLogOut={this.handleLogOut}/>
               </>
             )}/>
             <Route path="/" render={() => (
               <>
                 <h1>Hello</h1>
                 <DecisionPage/>
-                <UserLogOut handleLogOut={this.handleLogOut}/>
               </>
             )}/>
         </Switch> 
