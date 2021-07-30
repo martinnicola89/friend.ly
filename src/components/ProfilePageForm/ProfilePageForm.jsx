@@ -22,7 +22,7 @@ export default class ProfilePageForm extends Component {
         headers: {"Content-Type": "application/json",'Authorization': 'Bearer ' + jwt},
         body: JSON.stringify({bio: this.state.bio, interests: this.state.interests, friends: this.state.friends}) // <-- send this object to server
         })
-        this.getProfile()
+        this.props.getProfile()
     } catch (err) {
       console.error("Error:", err) // <-- log if error
     }
