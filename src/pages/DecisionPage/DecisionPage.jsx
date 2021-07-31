@@ -28,6 +28,7 @@ export default class DecisionPage extends React.Component {
                 {this.state.allUsers.map(u => (
                     <>
                         <h1>{u.name}</h1>
+                        <img src={u.imageUrl} /> 
                         <h1>{u.bio}</h1>
                         <h1>{u.interests}</h1>
                         <h1>{u.friends}</h1>

@@ -45,34 +45,27 @@ var upload = multer({
         })
     })
   }
+
+
+
+async function uploadImage(req, res){
+    try{
+        console.log('we get hereee!')
+        await uploadToS3(req, res)
+        .then(downloadUrl => {
+            console.log("req.params.id", req.params)
+            Profile.findById(req.params.id, async function (err, profile) {
+                profile.imageUrl = downloadUrl;
+                await profile.save();
+            });
+            res.status(200).json(downloadUrl)
+        })
+    }catch(err) {
+        return res.status(400).json(err); 
+      }
+    
+}
+
 module.exports = {
     uploadImage,
   };
-
-function uploadImage(req, res){
-
-    console.log('we get hereee!')
-    uploadToS3(req, res)
-    .then(downloadUrl => {
-        console.log("req.params.id", req.params)
-        
-       
-        // Profile.findOne({user: user}, function (err, profile) {
-        //     profile.imageUrl = downloadUrl;
-        //     profile.save();
-        //   });
-        // db.update({
-        //     TableName: "Profile",
-        //     id: req.user._id,
-        //     imageUrl: downloadUrl
-        // })
-        // .then(() => res.status(200).send({downloadUrl}))
-        // let profile = Profile.update({
-        //     user: req.user._id,
-        //     imageUrl: downloadUrl
-        // }
-
-        // ).then(() => res.status(200).send({profile}))
-        return res.status(200).send({downloadUrl})
-    })
-}
