@@ -33,6 +33,10 @@ export default class App extends React.Component {
     }
   }
 
+  getUser = async () => {
+    await this.state.user
+  }
+
   handleLogOut = () => {
     let token = localStorage.getItem('token');
     console.log("token in handle log out", token)
@@ -66,9 +70,9 @@ export default class App extends React.Component {
                 <ProfilePage />
               </>
             )}/>
-            <Route path={'/profile/form'} render={() => (
+            <Route path={'/profile/form'} render={(props) => (
               <>
-                <ProfilePageForm />
+                <ProfilePageForm {...props} getUser={this.getUser()}/>
               </>
             )}/>
             <Route path="/" render={() => (

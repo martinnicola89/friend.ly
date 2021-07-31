@@ -3,10 +3,13 @@ import { Component } from 'react';
 export default class ProfilePageForm extends Component {
 
   state = {
+    user: this.props.user,
     bio: "",
     interests: "",
     friends: "",
+    pictures: "",
   };
+
 
   handleChange = (e) => {
     e.preventDefault();
@@ -20,7 +23,7 @@ export default class ProfilePageForm extends Component {
       await fetch("/api/users/profile", {
         method: "POST",
         headers: {"Content-Type": "application/json",'Authorization': 'Bearer ' + jwt},
-        body: JSON.stringify({bio: this.state.bio, interests: this.state.interests, friends: this.state.friends}) // <-- send this object to server
+        body: JSON.stringify({bio: this.state.bio, interests: this.state.interests, friends: this.state.friends, imageUrl: this.state.pictures[1]}) // <-- send this object to server
         })
         this.props.getProfile()
     } catch (err) {
