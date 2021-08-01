@@ -4,14 +4,41 @@ import Message from "../../components/Message/Message";
 import ChatOnline from "../../components/ChatOnline/ChatOnline";
 import {useRef,useEffect,useState} from "react";
 import axios from "axios";
+import {io} from "socket.io-client";
 
 export default function Messenger(props) {
 
     const [conversations, setConversations] = useState([]);
     const [currentChat, setCurrentChat] = useState(null);
     const [messages, setMessages] = useState([]);
-    const [newMessage, setNewMessage] = useState("");
+    const [newMessage, setNewMessage] = useState(null);
+    const [arrivalMessage, setArrivalMessage] = useState(null);
+    const [onlineUsers, setOnlineUsers] = useState([]);
+    const socket = useRef();
     const scrollRef = useRef();
+
+    useEffect(()=>{
+        socket.current = io("ws://localhost:8900");
+        socket.current.on("get-message", data=>{
+            setArrivalMessage({
+                sender: data.senderId,
+                text: data.text,
+                createdAt: Date.now(),
+            })
+        })
+    },[])
+
+    useEffect(()=>{
+        arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) &&
+        setMessages(prev=>[...prev, arrivalMessage])
+    }, [arrivalMessage, currentChat])
+
+    useEffect(()=>{
+        socket.current.emit("send-user", props.user?._id)
+        socket.current.on("get-users", (users)=>{
+            setOnlineUsers(users);
+        })
+    }, [props.user])
 
     useEffect(() => {
         const getConversations = async () => {
@@ -30,11 +57,9 @@ export default function Messenger(props) {
     useEffect(() => {
         const getMessages = async () => {
             try {
-                console.log("currentChatId", currentChat._id);
                 let fetchMessagesDataResponse = await fetch('/api/messages/'+currentChat?._id)
                 if (!fetchMessagesDataResponse.ok) throw new Error("Couldn't fetch orders")
                 let messagesData = await fetchMessagesDataResponse.json() // <------- convert fetch response into a js object
-                console.log("Messages data", messagesData)
                 setMessages(messagesData);
             } catch(err) {
                 console.log(err)
@@ -50,6 +75,15 @@ export default function Messenger(props) {
             conversationId: currentChat._id,
             text: newMessage,
         };
+
+        const receiverId = currentChat.members.find(member=> member !== props.user._id)
+
+        socket.current.emit("send-message", {
+            'senderId': props.user._id,
+            'receiverId': receiverId,
+            'text': newMessage,
+        })
+
         try {
             await axios.post("/api/messages", message);
             await setMessages([...messages, message]);
@@ -58,6 +92,7 @@ export default function Messenger(props) {
             console.log(err);
         }
     };
+
 
     useEffect(()=>{
         scrollRef.current?.scrollIntoView({behavior:"smooth"})
@@ -97,7 +132,7 @@ export default function Messenger(props) {
             </div>
             <div className="chatOnline">
                 <div className="chatOnlineWrapper">
-                    <ChatOnline />
+                    <ChatOnline onlineUsers={onlineUsers} currentId={props.user._id} setCurrentChat={setCurrentChat}/>
                 </div>
             </div>
         </div>

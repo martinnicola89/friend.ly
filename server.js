@@ -3,6 +3,49 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 
+const io = require("socket.io")(8900, {
+  cors: {
+    origin: "http://localhost:3000",
+  },
+})
+
+let users = [];
+
+const addUser = (userId,socketId) => {
+  !users.some(user=>user.userId === userId) &&
+    users.push({'userId': userId, 'socketId': socketId});
+}
+
+const removeUser = (socketId) => {
+  users = users.filter(user=>user['socketId'] !== socketId)
+}
+
+const getUser = (userId)=>{
+  return users.find(user=>user['userId'] === userId)
+}
+
+io.on("connection", (socket) => {
+  socket.on("send-user", userId=>{
+    addUser(userId, socket.id)
+    io.emit("get-users", users)
+  });
+
+  // send and get a message
+  socket.on("send-message", ({senderId, receiverId, text})=>{
+    const user = getUser(receiverId);
+    console.log(user['socketId'])
+    io.to(user['socketId']).emit("get-message", {
+      'senderId': senderId,
+      'text': text,
+    })
+  })
+
+  socket.on("disconnect", ()=>{
+    removeUser(socket.id)
+    io.emit("get-users", users)
+  })
+})
+
 require('dotenv').config()
 require('./config/database.js')
 
