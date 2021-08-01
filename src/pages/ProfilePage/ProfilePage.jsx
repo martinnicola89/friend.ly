@@ -1,7 +1,6 @@
 import React from 'react';
 import ProfilePageForm from '../../components/ProfilePageForm/ProfilePageForm';
 import ProfileData from '../../components/ProfileData/ProfileData'
-
 import ImageUploader from 'react-images-upload';
 import axios from 'axios'
 
@@ -10,28 +9,27 @@ export default class ProfilePage extends React.Component {
     state = {
         userData: {},
         profileData: null,
+        imageUrl: "",
+        photo: true,
       }
-    
-
+ 
       constructor(props) {
         super(props);
         console.log("constructor props", props)
-         this.state = { pictures: [] };
+         this.state = { pictures: []};
          this.onDrop = this.onDrop.bind(this);
          this.uploadImages = this.uploadImages.bind(this)
     }
     
-    onDrop(picture) {
+    onDrop = (picture) => {
         this.setState({
             pictures: this.state.pictures.concat(picture),
+            photo: true
         });
-    }
-    
+      }
     //with each image name we do axios calls (POST)
-    uploadImages(e){ 
-      e.preventDefault();
+    uploadImages(){ 
       console.log(this.state.pictures)
-    
       let uploadPromises = this.state.pictures.map(image => {
         let data = new FormData();
         data.append('image', image, image.name)
@@ -40,6 +38,10 @@ export default class ProfilePage extends React.Component {
       axios.all(uploadPromises)
       .then(images => {
         console.log('server response: ')
+        this.getProfile()
+        this.setState({
+          photo: false
+      });
     console.log(images)
       })
     }
@@ -59,7 +61,7 @@ export default class ProfilePage extends React.Component {
           if (!fetchUserDataResponse.ok) throw new Error("Couldn't fetch orders")
           let userD = await fetchUserDataResponse.json() // <------- convert fetch response into a js object
           this.setState({ userData: userD})
-          this.getProfile();
+          this.getProfile();        
         } catch (err) {
           console.error('ERROR:', err) // <-- log if error
         }
@@ -75,18 +77,18 @@ export default class ProfilePage extends React.Component {
                 <>
                   <ProfileData profileData={this.state.profileData}/>
                   <ImageUploader
-              key="image-uploader"
-              withIcon={true}
-              singleImage={true}
-              withPreview={true}
-              label="Maximum size file: 5MB"
-              buttonText="Choose an image"
-              onChange={this.onDrop}
-              imgExtension={['.jpg', '.png', '.jpeg']}
-              maxFileSize={5242880}
-          />
-          <button onClick={this.uploadImages}>Upload</button>
-          </>
+                    key="image-uploader"
+                    withIcon={true}
+                    singleImage={true}
+                    withPreview={this.state.photo}
+                    label="Maximum size file: 5MB"
+                    buttonText="Choose an image"
+                    onChange={this.onDrop}
+                    imgExtension={['.jpg', '.png', '.jpeg']}
+                    maxFileSize={5242880}
+                    />
+                  <button  onClick={() => {this.uploadImages()}}>Upload</button>
+                  </>
                 :
                 <ProfilePageForm getProfile={this.getProfile}/>
                 }

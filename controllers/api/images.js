@@ -57,8 +57,9 @@ async function uploadImage(req, res){
             Profile.findById(req.params.id, async function (err, profile) {
                 profile.imageUrl = downloadUrl;
                 await profile.save();
+               
             });
-            res.status(200).json(downloadUrl)
+            res.status(200).json('downloadUrl')       
         })
     }catch(err) {
         return res.status(400).json(err); 
