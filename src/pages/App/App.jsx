@@ -6,6 +6,7 @@ import ProfilePage from '../ProfilePage/ProfilePage';
 import ProfilePageForm from '../../components/ProfilePageForm/ProfilePageForm';
 import UserLogOut from '../../components/UserLogOut/UserLogOut';
 import DecisionPage from '../DecisionPage/DecisionPage';
+import Messenger from '../Messenger/Messenger';
 import { Link, Route, Switch} from 'react-router-dom';
 
 export default class App extends React.Component {
@@ -73,6 +74,11 @@ export default class App extends React.Component {
             <Route path={'/profile/form'} render={(props) => (
               <>
                 <ProfilePageForm {...props} getUser={this.getUser()}/>
+              </>
+            )}/>
+            <Route path={'/messenger'} render={() => (
+              <>
+                <Messenger user={this.state.user}/>
               </>
             )}/>
             <Route path="/" render={() => (

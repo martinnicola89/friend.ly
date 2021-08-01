@@ -29,7 +29,6 @@ export default class ProfilePageForm extends Component {
     } catch (err) {
       console.error("Error:", err) // <-- log if error
     }
-
   }
 
   render() {

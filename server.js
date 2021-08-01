@@ -19,6 +19,8 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.use(require('./config/auth'));
 // Put API routes here, before the "catch all" route
 app.use('/api/users/profile', require('./routes/api/profiles'));
+app.use('/api/conversations', require('./routes/api/conversations'));
+app.use('/api/messages', require('./routes/api/messages'));
 app.use('/api/users', require('./routes/api/users'));
 // Mount our custom auth middleware to protect routes below it. These routes will have access to the "req.user" variable.
 

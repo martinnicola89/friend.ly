@@ -4,6 +4,7 @@ module.exports = {
     create,
     index,
     decisionIndex,
+    show,
   };
   
   async function create(req, res) {
@@ -44,6 +45,16 @@ module.exports = {
       }
       res.status(200).json(otherProfiles);
     } catch (err) {
+      res.status(400).json(err);
+    }
+  }
+
+  async function show(req, res) {
+    try {
+
+      let profile = await Profile.find({user: req.params.id});
+      res.status(200).json(profile[0].imageUrl);
+    } catch(err) {
       res.status(400).json(err);
     }
   }
