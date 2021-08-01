@@ -1,0 +1,39 @@
+.userName{
+      width: 905px;
+}
+.yes-no{
+      display: flex;
+      justify-content: center;
+}
+
+.yes{
+      padding: .8em;
+      border: none;
+      border-radius: 10px;
+}
+
+.no{
+      margin-right: 40px;
+      padding: .8em;
+      border: none;
+      border-radius: 10px;
+}
+
+.yes:hover{
+      background: rgba(255,255,255,0.1);
+      box-shadow: 4px 4px 60px 8px #f59608;
+}
+
+.no:hover{
+      background: rgba(255,255,255,0.1);
+      box-shadow: 4px 4px 60px 8px #f59608;
+}
+
+.decisionPN{
+      background: white;
+      padding: 3em;
+      width: 1000px;
+      margin-left: 219px;
+      height: 30vh;
+      border-radius: 20px;
+}

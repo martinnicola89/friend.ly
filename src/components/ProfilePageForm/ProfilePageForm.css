@@ -1,0 +1,34 @@
+.profileForm{
+      background: transparent;
+      margin-left: 420px;
+      width: 600px;
+      padding: 10em;
+      margin-bottom: 2em;
+      border: none;
+      border-left: 1px solid white;
+      border-top: 1px solid white;
+      border-radius: 5000px;
+      box-shadow: 4px 4px 60px rgba(0,0,0,0.2);
+      font-family: Montserrat, sans-serif;
+      font-weight: 500;
+      transition: all 0.2s ease-in-out;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      color:black;
+}
+
+.submitFormBtn{
+      background: transparent;
+      width: 200px;
+      padding: 1em;
+      margin-bottom: 2em;
+      border: none;
+      border-left: 1px solid white;
+      border-top: 1px solid white;
+      border-radius: 5000px;
+      box-shadow: 4px 4px 60px rgba(0,0,0,0.2);
+      font-family: Montserrat, sans-serif;
+      font-weight: 500;
+      transition: all 0.2s ease-in-out;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      color:black;
+}

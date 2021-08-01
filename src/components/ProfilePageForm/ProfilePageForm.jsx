@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import "./ProfilePageForm.css"
 
 export default class ProfilePageForm extends Component {
 
@@ -34,7 +35,7 @@ export default class ProfilePageForm extends Component {
 
   render() {
     return(
-      <div>
+      <div className="profileForm">
         <hr />
         Bio:
         <textarea
@@ -55,7 +56,7 @@ export default class ProfilePageForm extends Component {
           name="friends"
           onChange={this.handleChange}
           value={this.state.friends}></textarea>
-        <button onClick={this.handleSubmit}>Submit!</button>
+        <button className="submitFormBtn" onClick={this.handleSubmit}>Submit!</button>
       </div>
     )
   }

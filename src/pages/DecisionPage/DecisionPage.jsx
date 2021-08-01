@@ -1,5 +1,5 @@
 import React from 'react';
-
+import "./DecisionPage.css"
 export default class DecisionPage extends React.Component {
 
     state = {
@@ -24,14 +24,20 @@ export default class DecisionPage extends React.Component {
     
     render() {
         return (
-            <div>
+            <div className="swipe-form">
                 {this.state.allUsers.map(u => (
                     <>
-                        <h1>{u.name}</h1>
-                        <img src={u.imageUrl} /> 
-                        <h1>{u.bio}</h1>
-                        <h1>{u.interests}</h1>
-                        <h1>{u.friends}</h1>
+                        <div className="decisionPN">
+                              <img className="userPhoto" src={u.imageUrl} /> 
+                              <h1 className="userName">{u.name}</h1>
+                              <div className="yes-no">
+                                    <button className="no">no</button>
+                                    <button className="yes">yes</button>
+                              </div>
+                        </div>
+                        <h1 className="userBio">{u.bio}</h1>
+                        <h1 className="userInterests">{u.interests}</h1>
+                        <h1 className="userFriends">{u.friends}</h1>
                     </>
             ))}
             </div>
