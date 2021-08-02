@@ -81,7 +81,7 @@ export default class App extends React.Component {
             )}/>
             <Route path="/" render={() => (
               <>
-                <DecisionPage/>
+                <DecisionPage user={this.state.user}/>
               </>
             )}/>
         </Switch> 

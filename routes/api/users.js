@@ -7,6 +7,8 @@ const usersCtrl = require('../../controllers/api/users');
 router.post('/login', usersCtrl.login);
 router.post('/signup', usersCtrl.create);
 router.get('/userdata', usersCtrl.show);
+router.post('/:id', usersCtrl.saveFriends);
+
 // POST /api/users/login
 
 

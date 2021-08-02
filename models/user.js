@@ -15,7 +15,8 @@ const userSchema = new Schema({
     trim: true,
     minLength: 3,
     required: true
-  }
+  },
+  friends: {type: Array},
 }, {
   timestamps: true,
   // A cool mongoose trick to not send passwords to clients! (even though they'll be hashed)
