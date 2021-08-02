@@ -1,11 +1,8 @@
 import React from 'react';
 import "./DecisionPage.css"
-
 import { FiArrowDownCircle, FiArrowUpCircle } from 'react-icons/fi';
 let arrows = { color: "lightblue", fontSize: "4em"};
-
 export default class DecisionPage extends React.Component {
-
     state = {
         allUsers: [],
         isEnabled: 1,
@@ -23,12 +20,10 @@ export default class DecisionPage extends React.Component {
       this.setState({ allUsers: profile })
       console.log("this state all users", this.state.allUsers);
     }
-
     getCurrentProfile = (index) => {
       let allUsers = this.state.allUsers;
       this.setState({currentProfile: allUsers[index]})
     } 
-
     handleYesSwipe = async (incomingUser) => {
       let allUsers = this.state.allUsers;
       allUsers = allUsers.splice(this.state.index, 1)
@@ -38,7 +33,6 @@ export default class DecisionPage extends React.Component {
       this.getCurrentProfile(currentIndex)
       this.setState({likedUsers: likedUsers, index: currentIndex})
     } 
-
     handleNoSwipe = async (incomingUser) => {
       let dislikedUsers = this.state.dislikedUsers;
       dislikedUsers.push(incomingUser)
@@ -47,13 +41,11 @@ export default class DecisionPage extends React.Component {
       this.getCurrentProfile(currentIndex)
       this.setState({dislikedUsers: dislikedUsers, index: currentIndex})
     }
-
       handleClick = (incoming) => {
         this.setState({
             isEnabled: incoming
         })
       }
-
    async componentDidMount() {
         try {
          await this.getProfile();
@@ -62,10 +54,8 @@ export default class DecisionPage extends React.Component {
           console.error('ERROR:', err) // <-- log if error
         }
       }
-    
     render() {
         return (
-          
             <div className="swipe-form">
                   {this.state.index >= this.state.allUsers.length ?
                       <h1>No More Profiles To Show</h1>
