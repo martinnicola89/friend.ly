@@ -3,6 +3,7 @@ import ProfilePageForm from '../../components/ProfilePageForm/ProfilePageForm';
 import ProfileData from '../../components/ProfileData/ProfileData'
 import ImageUploader from 'react-images-upload';
 import axios from 'axios'
+import "./ProfilePage.css"
 
 export default class ProfilePage extends React.Component {
     
@@ -11,6 +12,7 @@ export default class ProfilePage extends React.Component {
         profileData: null,
         imageUrl: "",
         photo: true,
+        visible: false
       }
  
       constructor(props) {
@@ -24,9 +26,12 @@ export default class ProfilePage extends React.Component {
     onDrop = (picture) => {
         this.setState({
             pictures: this.state.pictures.concat(picture),
-            photo: true
+            photo: true,
+            visible: true
         });
       }
+
+
     //with each image name we do axios calls (POST)
     uploadImages(){ 
       console.log(this.state.pictures)
@@ -38,10 +43,13 @@ export default class ProfilePage extends React.Component {
       axios.all(uploadPromises)
       .then(images => {
         console.log('server response: ')
-        this.getProfile()
+        
         this.setState({
-          photo: false
+          photo: false,
+          tab: false,
+          visible: false
       });
+      this.getProfile()
     console.log(images)
       })
     }
@@ -74,21 +82,27 @@ export default class ProfilePage extends React.Component {
                 <h2>{this.state.userData?.name}</h2>
                 <h2>{this.state.userData?.email}</h2>
                 {this.state.profileData ? 
-                <>
+               
+                <div className="photoUpload">
                   <ProfileData profileData={this.state.profileData}/>
+              
                   <ImageUploader
                     key="image-uploader"
-                    withIcon={true}
+                    withIcon={false}
                     singleImage={true}
                     withPreview={this.state.photo}
-                    label="Maximum size file: 5MB"
-                    buttonText="Choose an image"
+                    label=""
+                    buttonText="Change Profile Picture"
                     onChange={this.onDrop}
                     imgExtension={['.jpg', '.png', '.jpeg']}
                     maxFileSize={5242880}
                     />
-                  <button  onClick={() => {this.uploadImages()}}>Upload</button>
-                  </>
+
+
+                  <button  className={this.state.visible ? undefined : 'hidden'} onClick={() => {this.uploadImages()}}>Looks Good</button>
+  
+                  </div>
+                  
                 :
                 <ProfilePageForm getProfile={this.getProfile}/>
                 }
