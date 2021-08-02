@@ -17,7 +17,7 @@ export default class ProfilePage extends React.Component {
  
       constructor(props) {
         super(props);
-        console.log("constructor props", props)
+        // console.log("constructor props", props)
          this.state = { pictures: []};
          this.onDrop = this.onDrop.bind(this);
          this.uploadImages = this.uploadImages.bind(this)
