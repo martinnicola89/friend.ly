@@ -17,7 +17,7 @@ export default function Messenger(props) {
     const scrollRef = useRef();
 
     useEffect(()=>{
-        socket.current = io("mongodb+srv://Kircicegi:sei40@mkd.geogs.mongodb.net/test");
+        socket.current = io("ws://localhost:8900");
         socket.current.on("get-message", data=>{
             setArrivalMessage({
                 sender: data.senderId,
