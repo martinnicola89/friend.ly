@@ -5,8 +5,7 @@ const profileSchema = new Schema({
     name: {type: String, required: true},
     imageUrl: {type: String, required: true},
     bio: {type: String, required: true},
-    interests: {type: String, required: true},
-    friends: {type: String, required: true},
+    interests: {type: Array, required: true},
     user: { type: Schema.Types.ObjectId, ref: 'User' },
     }, {
     timestamps: true,
