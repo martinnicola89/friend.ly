@@ -1,4 +1,7 @@
-.hidden { 
-    display:none; 
-    
+.hidden {
+  display: none;
+}
+
+.profileImage {
+  width: 100px;
 }

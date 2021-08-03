@@ -7,7 +7,9 @@ const usersCtrl = require('../../controllers/api/users');
 router.post('/login', usersCtrl.login);
 router.post('/signup', usersCtrl.create);
 router.get('/userdata', usersCtrl.show);
-// POST /api/users/login
+router.post('/:id', usersCtrl.saveFriends);
+router.get('/userdata/:friendId', usersCtrl.getFriend);
 
+// POST /api/users/login
 
 module.exports = router;

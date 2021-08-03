@@ -6,6 +6,7 @@ import ProfilePage from '../ProfilePage/ProfilePage';
 import ProfilePageForm from '../../components/ProfilePageForm/ProfilePageForm';
 import UserLogOut from '../../components/UserLogOut/UserLogOut';
 import DecisionPage from '../DecisionPage/DecisionPage';
+import Messenger from '../Messenger/Messenger';
 import { Link, Route, Switch} from 'react-router-dom';
 
 export default class App extends React.Component {
@@ -39,7 +40,6 @@ export default class App extends React.Component {
 
   handleLogOut = () => {
     let token = localStorage.getItem('token');
-    console.log("token in handle log out", token)
     token = null;
     localStorage.removeItem('token');
     this.setState({user: null})      
@@ -56,6 +56,7 @@ export default class App extends React.Component {
                   <div className="nav-bar">
                         <Link className="home" to='/'>Home</Link>&nbsp;&nbsp;
                         <Link className="profile" to='/profile'>Profile</Link>&nbsp;&nbsp;
+                        <Link className="profile" to='/messenger'>Messenger</Link>&nbsp;&nbsp;
                   </div>
                   <div className="logoutBtn">
                         <UserLogOut className="logout" handleLogOut={this.handleLogOut}/>
@@ -79,9 +80,14 @@ export default class App extends React.Component {
                 <ProfilePageForm {...props} getUser={this.getUser()}/>
               </>
             )}/>
+            <Route path={'/messenger'} render={() => (
+              <>
+                <Messenger user={this.state.user}/>
+              </>
+            )}/>
             <Route path="/" render={() => (
               <>
-                <DecisionPage/>
+                <DecisionPage user={this.state.user}/>
               </>
             )}/>
         </Switch> 

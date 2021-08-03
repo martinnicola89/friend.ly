@@ -8,6 +8,8 @@ module.exports = {
   create,
   login,
   show,
+  saveFriends,
+  getFriend,
 };
 
 async function create(req, res) {
@@ -46,6 +48,27 @@ async function show(req, res) {
     let user = await User.findOne({name: req.user.name});
     res.status(200).json(user)
   } catch (err) {
+    res.status(400).json(err);
+  }
+}
+
+async function saveFriends(req, res) {
+  try {
+    let user = await User.findById(req.params.id);
+    let userFriends = req.body
+    user.friends = userFriends;
+    user.save();
+    res.status(200).json(user)
+  } catch(err) {
+      res.status(400).json(err);
+  }
+}
+
+async function getFriend(req, res) {
+  try {
+    let user = await User.findById(req.params.friendId)
+    res.status(200).json(user);
+  } catch(err) {
     res.status(400).json(err);
   }
 }
