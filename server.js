@@ -3,7 +3,7 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 
-const io = require("socket.io")(8900, {
+const io = require("socket.io")(3001, {
   cors: {
     origin: "http://localhost:3000",
   },
