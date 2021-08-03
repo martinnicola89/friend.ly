@@ -5,7 +5,7 @@ const logger = require('morgan');
 
 const io = require("socket.io")(8900, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "mongodb+srv://Kircicegi:sei40@mkd.geogs.mongodb.net/test",
   },
 })
 
