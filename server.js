@@ -46,7 +46,6 @@ io.on("connection", (socket) => {
         'text': text,
       })
     }
-
   })
 
   socket.on("disconnect", ()=>{

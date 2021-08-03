@@ -8,6 +8,7 @@ let arrows = { color: "lightblue", fontSize: "4em"};
 export default class DecisionPage extends React.Component {
 
     state = {
+        currentUser: {},
         allUsers: [],
         isEnabled: 1,
         currentProfile: {},
@@ -27,7 +28,7 @@ export default class DecisionPage extends React.Component {
       let user = await fetchUserDataResponse.json()
       let userFriends = user.friends;
       console.log("User Friends", userFriends);
-      this.setState({ likedUsers: userFriends })
+      this.setState({ likedUsers: userFriends, currentUser: user })
 
       let friendIds = []
       for (let u of userFriends) {
@@ -36,6 +37,11 @@ export default class DecisionPage extends React.Component {
       
       let arr = profile.filter(p => !friendIds.includes(p._id))
       this.setState({ allUsers: arr})
+    }
+
+    handleConversationStarter = async (incoming_friend_id, incoming_user_id) => {
+      let members = {'senderId': incoming_user_id, 'receiverId': incoming_friend_id}
+      return axios.post('/api/conversations', members)
     }
 
     getCurrentProfile = (index) => {
@@ -50,6 +56,7 @@ export default class DecisionPage extends React.Component {
       likedUsers.push(incomingUser)
       let currentIndex = this.state.index;
       this.getCurrentProfile(currentIndex)
+      this.handleConversationStarter(incomingUser.user, this.state.currentUser._id)
       this.setState({likedUsers: likedUsers, index: currentIndex})
     } 
 

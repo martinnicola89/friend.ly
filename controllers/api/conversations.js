@@ -7,14 +7,9 @@ module.exports = {
 
 async function newConversation(req, res) {
     try {
-        let conversation = await Conversation.find({members: {$in:[req.body.senderId, req.body.receiverId]}})
-        console.log("conversation in new conversation", conversation)
-        if (!conversation.length) {
-            console.log("inside if condition")
-            await Conversation.create({
-                members: [req.body.senderId, req.body.receiverId],
-            })
-        }
+        await Conversation.create({
+            members: [req.body.senderId, req.body.receiverId],
+        })
     } catch (err) {
         res.status(500).json(err)
     }
