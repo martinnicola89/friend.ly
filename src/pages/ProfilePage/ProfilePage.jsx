@@ -32,7 +32,6 @@ export default class ProfilePage extends React.Component {
         });
       }
 
-
     //with each image name we do axios calls (POST)
     uploadImages(){ 
       console.log(this.state.pictures)
@@ -63,11 +62,6 @@ export default class ProfilePage extends React.Component {
           this.setState({ profileData: profile})
       }
 
-      handleConversationStarter = async (incoming_friend_id, incoming_user_id) => {
-        let members = {'senderId': incoming_user_id, 'receiverId': incoming_friend_id}
-        return axios.post('/api/conversations', members)
-      }
-
       async componentDidMount() {
         try {
           let jwt = localStorage.getItem('token')
@@ -87,7 +81,7 @@ export default class ProfilePage extends React.Component {
                 <h1>profile</h1>
                 <h2>{this.state.userData?.name}</h2>
                 <h2>{this.state.userData?.email}</h2>
-                {this.state.userData?.friends.map(f =><><img className="profileImage" src={f.imageUrl}/><button onClick={() => this.handleConversationStarter(f.user, this.state.userData._id)}><Link to='/messenger'>{f.name}</Link></button></>)} 
+                {this.state.userData?.friends.map(f =><><img className="profileImage" src={f.imageUrl}/><p>{f.name}</p></>)} 
                 {this.state.profileData ? 
                
                 <div className="photoUpload">
