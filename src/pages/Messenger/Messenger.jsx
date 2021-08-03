@@ -1,7 +1,6 @@
 import "./Messenger.css"
 import Conversations from "../../components/Conversations/Conversations";
 import Message from "../../components/Message/Message";
-import ChatOnline from "../../components/ChatOnline/ChatOnline";
 import {useRef,useEffect,useState} from "react";
 import axios from "axios";
 import {io} from "socket.io-client";
@@ -127,11 +126,6 @@ export default function Messenger(props) {
                         
                         </div> 
                     </> : <span className="noConvo">Start a chat</span>}
-                </div>
-            </div>
-            <div className="chatOnline">
-                <div className="chatOnlineWrapper">
-                    <ChatOnline onlineUsers={onlineUsers} currentId={props.user._id} setCurrentChat={setCurrentChat}/>
                 </div>
             </div>
         </div>
