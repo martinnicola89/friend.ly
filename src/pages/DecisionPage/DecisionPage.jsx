@@ -20,8 +20,22 @@ export default class DecisionPage extends React.Component {
       let jwt = localStorage.getItem('token')
       let fetchProfileDataResponse = await fetch('/api/users/profile/decision', {headers: {'Authorization': 'Bearer ' + jwt}})
       if (!fetchProfileDataResponse.ok) throw new Error("Couldn't fetch orders")
-      let profile = await fetchProfileDataResponse.json() // <------- convert fetch response into a js object
-      this.setState({ allUsers: profile })
+      let profile = await fetchProfileDataResponse.json() 
+
+      let fetchUserDataResponse = await fetch('/api/users/userdata', {headers: {'Authorization': 'Bearer ' + jwt}})
+      if (!fetchUserDataResponse.ok) throw new Error("Couldn't fetch orders")
+      let user = await fetchUserDataResponse.json()
+      let userFriends = user.friends;
+      console.log("User Friends", userFriends);
+      this.setState({ likedUsers: userFriends })
+
+      let friendIds = []
+      for (let u of userFriends) {
+        friendIds.push(u._id);
+      }
+      
+      let arr = profile.filter(p => !friendIds.includes(p._id))
+      this.setState({ allUsers: arr})
     }
 
     getCurrentProfile = (index) => {
@@ -29,7 +43,7 @@ export default class DecisionPage extends React.Component {
       this.setState({currentProfile: allUsers[index]})
     } 
 
-    handleYesSwipe = async (incomingUser) => {
+    handleYesSwipe = (incomingUser) => {
       let allUsers = this.state.allUsers;
       allUsers = allUsers.splice(this.state.index, 1)
       let likedUsers = this.state.likedUsers;
@@ -39,7 +53,7 @@ export default class DecisionPage extends React.Component {
       this.setState({likedUsers: likedUsers, index: currentIndex})
     } 
 
-    handleNoSwipe = async (incomingUser) => {
+    handleNoSwipe = (incomingUser) => {
       let dislikedUsers = this.state.dislikedUsers;
       dislikedUsers.push(incomingUser)
       let currentIndex = this.state.index;
@@ -64,7 +78,7 @@ export default class DecisionPage extends React.Component {
       }
 
   async componentWillUnmount() {
-    return axios.post(`/api/users/${this.props.user._id}`, this.state.likedUsers)
+    return await axios.post(`/api/users/${this.props.user._id}`, this.state.likedUsers)
   }
 
     render() {

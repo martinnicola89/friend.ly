@@ -9,6 +9,7 @@ module.exports = {
   login,
   show,
   saveFriends,
+  getFriend,
 };
 
 async function create(req, res) {
@@ -54,11 +55,20 @@ async function show(req, res) {
 async function saveFriends(req, res) {
   try {
     let user = await User.findById(req.params.id);
-    user.friends = req.body;
+    let userFriends = req.body
+    user.friends = userFriends;
     user.save();
-    console.log("req.body in saveFriends", req.body, "user after save", user)
     res.status(200).json(user)
   } catch(err) {
       res.status(400).json(err);
+  }
+}
+
+async function getFriend(req, res) {
+  try {
+    let user = await User.findById(req.params.friendId)
+    res.status(200).json(user);
+  } catch(err) {
+    res.status(400).json(err);
   }
 }
