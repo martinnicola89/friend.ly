@@ -2,12 +2,19 @@ const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
+const http = require('http');
+const socketio = require('socket.io');
+const cors = require('cors');
 
-const io = require("socket.io")(8900, {
-  cors: {
-    origin: "mongodb+srv://Kircicegi:sei40@mkd.geogs.mongodb.net/test",
-  },
-})
+require('dotenv').config()
+require('./config/database.js')
+
+const app = express();
+const server = http.createServer(app);
+const io = socketio(server);
+
+
+app.use(cors());
 
 let users = [];
 
@@ -54,10 +61,6 @@ io.on("connection", (socket) => {
   })
 })
 
-require('dotenv').config()
-require('./config/database.js')
-
-const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());

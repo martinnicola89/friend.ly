@@ -3,9 +3,11 @@ import "./ProfileData.css"
 export default function ProfileData(props) {
     return(
         <>
-            <h2>Bio: {props.profileData.bio}</h2>
-            <h2>Interests: {props.profileData.interests.map(i => <p>{i.label}</p>)}</h2>
-            <h2>{props.profileData.friends}</h2>
+            <h2>Bio: </h2>
+            <p>{props.profileData.bio}</p>
+            <h2>Interests: </h2>
+            {props.profileData.interests.map(i => <p>{i.label}</p>)}
+            <p>{props.profileData.friends}</p>            
         </>
     )
 }
