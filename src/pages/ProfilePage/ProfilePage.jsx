@@ -86,7 +86,7 @@ export default class ProfilePage extends React.Component {
                
                 <div className="photoUpload">
                   <img className="profileImg" src={`${this.state.profileData.imageUrl}?${new Date()}`} key={new Date().getTime()} />
-                  <ProfileData profileData={this.state.profileData} friends={this.state.userData?.friends}/>
+                  <ProfileData getProfile={this.getProfile} profileData={this.state.profileData} friends={this.state.userData?.friends}/>
               
                   <ImageUploader
                     key="image-uploader"

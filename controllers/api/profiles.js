@@ -5,6 +5,7 @@ module.exports = {
     index,
     decisionIndex,
     show,
+    update: updateProfile,
   };
   
   async function create(req, res) {
@@ -58,3 +59,15 @@ module.exports = {
       res.status(400).json(err);
     }
   }  
+
+  async function updateProfile(req,res) {
+            try{
+                  let profile = await Profile.findById(req.params.id)
+                  profile.bio=req.body.bio
+                  profile.interests=req.body.interests
+                  profile.save()
+                  res.status(200).json("updatedP")
+            } catch(err){
+                  res.status(400).json(err);
+            }
+}
