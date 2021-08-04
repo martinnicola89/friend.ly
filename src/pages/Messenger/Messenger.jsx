@@ -17,7 +17,7 @@ export default function Messenger(props) {
     const scrollRef = useRef();
 
     useEffect(()=>{
-        socket.current = io();
+        socket.current = io("http://friendl-y.herokuapp.com/messenger");
         socket.current.on("get-message", data=>{
             setArrivalMessage({
                 sender: data.senderId,
