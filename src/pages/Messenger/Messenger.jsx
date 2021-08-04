@@ -13,12 +13,12 @@ export default function Messenger(props) {
     const [newMessage, setNewMessage] = useState(null);
     const [arrivalMessage, setArrivalMessage] = useState(null);
     const [onlineUsers, setOnlineUsers] = useState([]);
-    const socket = useRef();
     const scrollRef = useRef();
+    let socket = io();
+
 
     useEffect(()=>{
-        socket.current = io("http://friendl-y.herokuapp.com/messenger");
-        socket.current.on("get-message", data=>{
+        socket.on("get-message", data=>{
             setArrivalMessage({
                 sender: data.senderId,
                 text: data.text,
@@ -33,8 +33,8 @@ export default function Messenger(props) {
     }, [arrivalMessage, currentChat])
 
     useEffect(()=>{
-        socket.current.emit("send-user", props.user?._id)
-        socket.current.on("get-users", (users)=>{
+        socket.emit("send-user", props.user?._id)
+        socket.on("get-users", (users)=>{
             setOnlineUsers(users);
         })
     }, [props.user])
@@ -77,7 +77,7 @@ export default function Messenger(props) {
 
         const receiverId = currentChat.members.find(member=> member !== props.user._id)
 
-        socket.current.emit("send-message", {
+        socket.emit("send-message", {
             'senderId': props.user._id,
             'receiverId': receiverId,
             'text': newMessage,
@@ -85,7 +85,7 @@ export default function Messenger(props) {
 
         try {
             await axios.post("/api/messages", message);
-            await setMessages([...messages, message]);
+            setMessages([...messages, message]);
             setNewMessage("");
         } catch(err) {
             console.log(err);
@@ -123,7 +123,6 @@ export default function Messenger(props) {
                         <div className="chatBoxBottom">
                             <textarea className="chatMessageInput" placeholder="Write your message here..." onChange={(e)=>setNewMessage(e.target.value)} value={newMessage}></textarea>
                             <button className="chatSubmitButton" onClick={handleSubmit}>Send</button>
-                        
                         </div> 
                     </> : <span className="noConvo">Start a chat</span>}
                 </div>
