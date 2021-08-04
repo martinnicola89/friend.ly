@@ -13,7 +13,7 @@ export default class ProfilePage extends React.Component {
         profileData: null,
         imageUrl: "",
         photo: true,
-        visible: false
+        visible: false,
       }
  
       constructor(props) {
@@ -62,6 +62,10 @@ export default class ProfilePage extends React.Component {
           this.setState({ profileData: profile})
       }
 
+      handleDeleteFriend = async (userId, friendId) => {
+        return await axios.delete(`/api/users/${userId}/${friendId}`);
+      }
+
       async componentDidMount() {
         try {
           let jwt = localStorage.getItem('token')
@@ -81,7 +85,7 @@ export default class ProfilePage extends React.Component {
                 <h1>profile</h1>
                 <h2>{this.state.userData?.name}</h2>
                 <h2>{this.state.userData?.email}</h2>
-                {this.state.userData?.friends.map(f =><><img className="profileImage" src={f.imageUrl}/><p>{f.name}</p></>)} 
+                {this.state.userData?.friends.map(f =><><img className="profileImage" src={f.imageUrl}/><p>{f.name}<button className="xDelete" onClick={() => {this.handleDeleteFriend(this.state.userData._id, f.user)}}>X</button></p></>)} 
                 {this.state.profileData ? 
                
                 <div className="photoUpload">
