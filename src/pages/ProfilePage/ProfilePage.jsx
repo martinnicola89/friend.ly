@@ -100,9 +100,7 @@ export default class ProfilePage extends React.Component {
                     maxFileSize={5242880}
                     />
 
-
                   <button  className={this.state.visible ? undefined : 'hidden'} onClick={() => {this.uploadImages()}}>Looks Good</button>
-  
                   </div>
                   
                 :

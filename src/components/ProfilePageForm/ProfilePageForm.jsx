@@ -12,30 +12,29 @@ const interests = [
 ];
 
 export default class ProfilePageForm extends Component {
+
   state = {
     user: this.props.user,
     bio: "",
     interests: [],
-
     pictures: "",
   };
+
   handleChange = (e) => {
     e.preventDefault();
     this.setState({ [e.target.name]: e.target.value });
     }
 
-
   handleSelect = (incomingInterest) => {
-
     let interests = this.state.interests
     incomingInterest.map(i => i.label)
-   
     interests.push(incomingInterest[incomingInterest.length-1])
     console.log("incoming interest", incomingInterest[incomingInterest.length-1])
     interests.flat(Infinity)
     console.log('interests', interests)
     this.setState({interests: interests})
   }
+
   handleSubmit = async () => {
     try {
       let jwt = localStorage.getItem('token')
@@ -49,6 +48,7 @@ export default class ProfilePageForm extends Component {
       console.error("Error:", err) // <-- log if error
     }
   }
+
   render() {
     return(
       <div className="profileForm">
