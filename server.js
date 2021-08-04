@@ -2,21 +2,25 @@ const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
+const http = require('http');
+const socketio = require('socket.io');
 const cors = require('cors');
 
 require('dotenv').config()
 require('./config/database.js')
 
 const app = express();
+const server = http.createServer(app);
+const io = socketio(server);
 
 
 app.use(cors());
 
-const io = require("socket.io")(8900, {
-  cors: {
-    origin: "http://localhost:3001",
-  },
-})
+// const io = require("socket.io")(8900, {
+//   cors: {
+//     origin: "http://localhost:3001",
+//   },
+// })
 
 let users = [];
 
