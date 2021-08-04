@@ -10,6 +10,7 @@ module.exports = {
   show,
   saveFriends,
   getFriend,
+  delete: deleteFriend,
 };
 
 async function create(req, res) {
@@ -68,6 +69,20 @@ async function getFriend(req, res) {
   try {
     let user = await User.findById(req.params.friendId)
     res.status(200).json(user);
+  } catch(err) {
+    res.status(400).json(err);
+  }
+}
+
+async function deleteFriend(req, res) {
+  try {
+    let user = await User.findById(req.params.userId);
+    for (let i=0; i < user.friends.length; i++) {
+      if (user.friends[i].user === req.params.friendId)
+        user.friends.splice(i, 1)
+    }
+    user.save();
+    res.status(200).json("delete friend!")
   } catch(err) {
     res.status(400).json(err);
   }

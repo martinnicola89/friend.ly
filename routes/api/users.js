@@ -9,6 +9,7 @@ router.post('/signup', usersCtrl.create);
 router.get('/userdata', usersCtrl.show);
 router.post('/:id', usersCtrl.saveFriends);
 router.get('/userdata/:friendId', usersCtrl.getFriend);
+router.delete('/:userId/:friendId', usersCtrl.delete);
 
 // POST /api/users/login
 
