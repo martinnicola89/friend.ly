@@ -2,10 +2,11 @@ const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
+const cors = require('cors');
 
 const io = require("socket.io")(8900, {
   cors: {
-    origin: "/",
+    origin: "http://localhost:3001",
   },
 })
 
@@ -59,6 +60,7 @@ require('./config/database.js')
 
 const app = express();
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 
