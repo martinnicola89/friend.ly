@@ -2,6 +2,83 @@
   display: none;
 }
 
+.hide {
+  display: none;
+}
 .profileImage {
   width: 100px;
+}
+
+.secret-popup {
+  display: none;
+  background-color: rgba(59,30,94,0.9);
+  position: fixed;
+  z-index: 50;
+  width: 100%;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.show-popup {
+  display: flex;
+}
+
+.popup-wrapper {
+  background-color: white;
+  flex-direction: column;
+  padding: 2em;
+  width: 50%;
+}
+
+.popup-wrapper audio {
+  width: 100%;
+  margin: 2em 0;
+}
+
+.popup-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.popup-wrapper h3 {
+  font-weight: bold;
+  color: #3b1e5e;
+}
+
+.x-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: #3b1e5e;
+  transform: rotate(45deg);
+  cursor: pointer;
+  transition: .2s;
+}
+.x-btn:before,
+.x-btn:after {
+  width: 50%;
+  height: 2px;
+  content: '';
+  position: absolute;
+  background-color: #fff;
+}
+.x-btn:after {
+  transform: rotate(90deg);
+}
+
+.x-btn:hover {
+  background-color: #d8d6e9;
+  transition: 0.5s;
+}
+
+.close-popup {
+  cursor: pointer;
 }

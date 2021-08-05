@@ -73,3 +73,16 @@
       display: flex;
       justify-content: flex-end;
 }
+
+#messengerLogo {
+  width: 35px;
+  align-content: center;
+  padding-left: .6rem;
+}
+
+#homeLogo{
+  width: 35px;
+  align-content: center;
+  padding-left: .6rem;
+  margin-bottom: .3rem;
+}

@@ -6,18 +6,33 @@ import ProfilePage from '../ProfilePage/ProfilePage';
 import ProfilePageForm from '../../components/ProfilePageForm/ProfilePageForm';
 import UserLogOut from '../../components/UserLogOut/UserLogOut';
 import DecisionPage from '../DecisionPage/DecisionPage';
+import EditProfileForm from '../../components/EditProfileForm/EditProfileForm'
 import Messenger from '../Messenger/Messenger';
 import { Link, Route, Switch} from 'react-router-dom';
+import axios from 'axios'
 
 export default class App extends React.Component {
 
   state = {
     user: null,
+    allUsers:[],
+    addedFriend: false,
+    tab: 0,
+    deleted: false,
+
+  }
+  toggle = (incoming) => {
+    console.log("im being fucking hit")
+    this.setState({
+      tab: incoming,
+    })
+ 
   }
 
   setUserInState = (incomingUserData) => {
     this.setState({ user: incomingUserData})
   }
+
 
   componentDidMount() {
     let token = localStorage.getItem('token')
@@ -45,6 +60,14 @@ export default class App extends React.Component {
     this.setState({user: null})      
   }
 
+  handleDeleteFriend = async (userId, friendId) => {
+    await axios.delete(`/api/users/${userId}/${friendId}`);
+    this.setState({
+      deleted: true
+  });
+  // window.location.reload(true);
+  }
+
   render() {
     return (
       <div className="App">
@@ -54,9 +77,9 @@ export default class App extends React.Component {
                   {this.state.user ?
                   <>
                   <div className="nav-bar">
-                        <Link className="home" to='/'>Home</Link>&nbsp;&nbsp;
-                        <Link className="profile" to='/profile'>Profile</Link>&nbsp;&nbsp;
-                        <Link className="profile" to='/messenger'>Messenger</Link>&nbsp;&nbsp;
+                        <Link className="home" to='/'><img id="homeLogo" src="https://upload.wikimedia.org/wikipedia/commons/e/ee/Chain_link_icon.png" /></Link>&nbsp;&nbsp;
+                        <Link className="profile" to='/profile'><img id="messengerLogo" src="https://d32ogoqmya1dw8.cloudfront.net/images/serc/empty_user_icon_256.v2.png" /></Link>&nbsp;&nbsp;
+                        <Link className="profile" to='/messenger'><img id="messengerLogo" src="https://static.thenounproject.com/png/1204376-200.png" /></Link>&nbsp;&nbsp;
                   </div>
                   <div className="logoutBtn">
                         <UserLogOut className="logout" handleLogOut={this.handleLogOut}/>
@@ -72,12 +95,17 @@ export default class App extends React.Component {
         <Switch>
             <Route path={'/profile'} render={() => (
               <>
-                <ProfilePage />
+                <ProfilePage tab={this.state.tab} toggle={this.toggle} deleted={this.state.deleted} handleDelete={this.handleDeleteFriend} allUsers={this.state.allUsers}/>
               </>
             )}/>
             <Route path={'/profile/form'} render={(props) => (
               <>
                 <ProfilePageForm {...props} getUser={this.getUser()}/>
+              </>
+            )}/>
+            <Route path={'/profile/edit/form'} render={(props) => (
+              <>
+                <EditProfileForm {...props} />
               </>
             )}/>
             <Route path={'/messenger'} render={() => (
@@ -87,7 +115,7 @@ export default class App extends React.Component {
             )}/>
             <Route path="/" render={() => (
               <>
-                <DecisionPage user={this.state.user}/>
+                <DecisionPage addedFriend={this.state.addedFriend} user={this.state.user}/>
               </>
             )}/>
         </Switch> 

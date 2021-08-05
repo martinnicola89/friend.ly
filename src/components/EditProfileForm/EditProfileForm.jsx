@@ -1,5 +1,6 @@
-import { Component } from 'react';
+
 import Select from 'react-select';
+import React from 'react';
 
 const interests = [
   { label: "Cars", value: 1 },
@@ -10,14 +11,16 @@ const interests = [
   { label: "Coding", value: 6 },
 ];
 
-export default class ProfilePageForm extends Component {
+export default class ProfilePageForm extends React.Component {
 
   state = {
       bio: "",
       interests: [],
       profileData: this.props.profileData,
-      editedP: false,
+      editedP: true,
 };
+
+
 
   handleChange = (e) => {
     e.preventDefault();
@@ -42,8 +45,13 @@ export default class ProfilePageForm extends Component {
         headers: {"Content-Type": "application/json",'Authorization': 'Bearer ' + jwt},
         body: JSON.stringify({bio: this.state.bio, interests: this.state.interests}) // <-- send this object to server
         })
-        await this.setState({ editedP: true })
         this.props.getProfile()
+
+        // this.props.updated= true 
+        // this.props.clickedEdit = false
+        
+        console.log("edited P", this.state.editedP)
+        window.location.reload(true);
     } catch (err) {
       console.error("Error:", err) // <-- log if error
     }
