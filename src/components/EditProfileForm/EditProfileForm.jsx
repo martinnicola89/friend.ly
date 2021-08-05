@@ -14,8 +14,6 @@ const interests = [
 export default class ProfilePageForm extends React.Component {
 
   state = {
-      bio: "",
-      interests: [],
       profileData: this.props.profileData,
       editedP: true,
 };
@@ -46,12 +44,7 @@ export default class ProfilePageForm extends React.Component {
         body: JSON.stringify({bio: this.state.bio, interests: this.state.interests}) // <-- send this object to server
         })
         this.props.getProfile()
-
-        // this.props.updated= true 
-        // this.props.clickedEdit = false
-        
-        console.log("edited P", this.state.editedP)
-        window.location.reload(true);
+        // window.location.reload(true);
     } catch (err) {
       console.error("Error:", err) // <-- log if error
     }
@@ -74,10 +67,10 @@ export default class ProfilePageForm extends React.Component {
           rows="2"
           name="bio"
           onChange={this.handleChange}
-          value={this.state.bio}></textarea>
+          placeholder={this.state.profileData.bio}></textarea>
         <br />
         Interests:
-        <Select name= "interests" onChange={this.handleSelect} options={ interests } isMulti />
+        <Select name= "interests" placeholder={this.state.profileData.interests.map(i => <li>{i.label}</li>)}onChange={this.handleSelect} options={ interests } isMulti />
         
         <button className="submitFormBtn" onClick={this.handleSubmit}>Submit!</button>
       </div>

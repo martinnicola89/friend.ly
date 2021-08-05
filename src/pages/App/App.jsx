@@ -8,7 +8,7 @@ import UserLogOut from '../../components/UserLogOut/UserLogOut';
 import DecisionPage from '../DecisionPage/DecisionPage';
 import EditProfileForm from '../../components/EditProfileForm/EditProfileForm'
 import Messenger from '../Messenger/Messenger';
-import { Link, Route, Switch} from 'react-router-dom';
+import { Link, Route, Switch, Redirect} from 'react-router-dom';
 import axios from 'axios'
 
 export default class App extends React.Component {
@@ -19,15 +19,20 @@ export default class App extends React.Component {
     addedFriend: false,
     tab: 0,
     deleted: false,
-
+    clickedEdit: false,
   }
   toggle = (incoming) => {
-    console.log("im being fucking hit")
+  
     this.setState({
       tab: incoming,
     })
  
   }
+  handleEdit = async() => {
+    this.setState({
+          clickedEdit: true,
+    })
+}
 
   setUserInState = (incomingUserData) => {
     this.setState({ user: incomingUserData})
@@ -95,7 +100,7 @@ export default class App extends React.Component {
         <Switch>
             <Route path={'/profile'} render={() => (
               <>
-                <ProfilePage tab={this.state.tab} toggle={this.toggle} deleted={this.state.deleted} handleDelete={this.handleDeleteFriend} allUsers={this.state.allUsers}/>
+                <ProfilePage tab={this.state.tab} toggle={this.toggle} deleted={this.state.deleted} handleDelete={this.handleDeleteFriend} allUsers={this.state.allUsers} clickedEdit={this.state.clickedEdit} handleEdit={this.handleEdit}/>
               </>
             )}/>
             <Route path={'/profile/form'} render={(props) => (
@@ -118,6 +123,7 @@ export default class App extends React.Component {
                 <DecisionPage addedFriend={this.state.addedFriend} user={this.state.user}/>
               </>
             )}/>
+            <Redirect to="/profile/form" />
         </Switch> 
         :
           <AuthPage setUserInState={this.setUserInState}/>

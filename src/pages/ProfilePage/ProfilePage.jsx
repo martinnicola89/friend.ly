@@ -16,8 +16,7 @@ export default class ProfilePage extends React.Component {
         imageUrl: "",
         photo: true,
         visible: false,
-        
-      
+
       }
  
       constructor(props) {
@@ -68,6 +67,8 @@ export default class ProfilePage extends React.Component {
           
       }
 
+      
+
       async componentDidMount() {
       try {
             let jwt = localStorage.getItem('token')
@@ -105,7 +106,7 @@ export default class ProfilePage extends React.Component {
                   <img className="profileImg" src={`${this.state.profileData.imageUrl}?${new Date()}`} key={new Date().getTime()} />
 
                   
-                  <ProfileData getProfile={this.getProfile} profileData={this.state.profileData} friends={this.state.userData?.friends}/>
+                  <ProfileData getProfile={this.getProfile} profileData={this.state.profileData} friends={this.state.userData?.friends} handleEdit={this.props.handleEdit} clickedEdit={this.props.clickedEdit}/>
 
                   <ImageUploader
                         key="image-uploader"
