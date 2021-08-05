@@ -95,7 +95,7 @@ export default class ProfilePage extends React.Component {
                 <div className={this.props.tab === 0 ? 'hidden' : undefined }>
       
                <img className="profileImage" src={f.imageUrl}/>
-               <p>{f.name}<button className="xDelete" onClick={() => {this.props.handleDelete(this.state.userData._id, f.user)}}>X</button></p></div>)} 
+               <p>{f.name}<button className="xDelete" onClick={() => {this.props.handleDelete(this.state.userData._id, f.user, true)}}>X</button></p></div>)} 
                <button className="hideBtn" onClick = {() => {this.props.toggle(0)} }>Hide</button>
                
 
@@ -106,7 +106,7 @@ export default class ProfilePage extends React.Component {
                   <img className="profileImg" src={`${this.state.profileData.imageUrl}?${new Date()}`} key={new Date().getTime()} />
 
                   
-                  <ProfileData getProfile={this.getProfile} profileData={this.state.profileData} friends={this.state.userData?.friends} handleEdit={this.props.handleEdit} clickedEdit={this.props.clickedEdit}/>
+                  <ProfileData handleEdit={this.props.handleEdit} getProfile={this.getProfile} profileData={this.state.profileData} friends={this.state.userData?.friends} handleEdit={this.props.handleEdit} clickedEdit={this.props.clickedEdit}/>
 
                   <ImageUploader
                         className="imager"

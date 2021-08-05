@@ -1,6 +1,7 @@
 import "./Messenger.css"
 import Conversations from "../../components/Conversations/Conversations";
 import Message from "../../components/Message/Message";
+import ChatOnline from "../../components/ChatOnline/ChatOnline";
 import {useRef,useEffect,useState} from "react";
 import axios from "axios";
 import {io} from "socket.io-client";
@@ -13,18 +14,22 @@ export default function Messenger(props) {
     const [newMessage, setNewMessage] = useState(null);
     const [arrivalMessage, setArrivalMessage] = useState(null);
     const [onlineUsers, setOnlineUsers] = useState([]);
+    const socket = useRef();
     const scrollRef = useRef();
-    let socket = io();
-
+    // const ENDPOINT = 'https://friendl-y.herokuapp.com/'
+    const ENDPOINT = '/'
 
     useEffect(()=>{
-        socket.on("get-message", data=>{
+        socket.current = io(ENDPOINT);
+
+        socket.current.on("get-message", data=>{
             setArrivalMessage({
                 sender: data.senderId,
                 text: data.text,
                 createdAt: Date.now(),
             })
         })
+        console.log(arrivalMessage)
     },[])
 
     useEffect(()=>{
@@ -33,8 +38,8 @@ export default function Messenger(props) {
     }, [arrivalMessage, currentChat])
 
     useEffect(()=>{
-        socket.emit("send-user", props.user?._id)
-        socket.on("get-users", (users)=>{
+        socket.current.emit("send-user", props.user?._id)
+        socket.current.on("get-users", (users)=>{
             setOnlineUsers(users);
         })
     }, [props.user])
@@ -77,7 +82,7 @@ export default function Messenger(props) {
 
         const receiverId = currentChat.members.find(member=> member !== props.user._id)
 
-        socket.emit("send-message", {
+        socket.current.emit("send-message", {
             'senderId': props.user._id,
             'receiverId': receiverId,
             'text': newMessage,
@@ -85,12 +90,13 @@ export default function Messenger(props) {
 
         try {
             await axios.post("/api/messages", message);
-            setMessages([...messages, message]);
+            await setMessages([...messages, message]);
             setNewMessage("");
         } catch(err) {
             console.log(err);
         }
     };
+
 
     useEffect(()=>{
         scrollRef.current?.scrollIntoView({behavior:"smooth"})
@@ -123,8 +129,14 @@ export default function Messenger(props) {
                         <div className="chatBoxBottom">
                             <textarea className="chatMessageInput" placeholder="Write your message here..." onChange={(e)=>setNewMessage(e.target.value)} value={newMessage}></textarea>
                             <button className="chatSubmitButton" onClick={handleSubmit}>Send</button>
+                        
                         </div> 
                     </> : <span className="noConvo">Start a chat</span>}
+                </div>
+            </div>
+            <div className="chatOnline">
+                <div className="chatOnlineWrapper">
+                    <ChatOnline onlineUsers={onlineUsers} currentId={props.user._id} setCurrentChat={setCurrentChat}/>
                 </div>
             </div>
         </div>

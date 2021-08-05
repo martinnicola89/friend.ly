@@ -9,7 +9,7 @@ export default function ProfileData (props) {
       return(
             <> 
                   {props.clickedEdit ? 
-                              <EditProfileForm getProfile={props.getProfile} profileData={props.profileData}/>
+                              <EditProfileForm handleEdit={props.handleEdit} getProfile={props.getProfile} profileData={props.profileData}/>
                               :
                               <>
                                     <div className='bioIndex'>
@@ -21,7 +21,7 @@ export default function ProfileData (props) {
                                           {props.profileData.interests.map(i => <p>{i.label}</p>)}
                                           <p>{props.profileData.friends}</p> 
                                     </div>
-                                          <button className="editBtn" onClick={ ()=>props.handleEdit() }>Edit Profile</button>
+                                          <button className="editBtn" onClick={ ()=>props.handleEdit(true) }>Edit Profile</button>
                               </>
                         }
             </>

@@ -2,15 +2,19 @@ const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
-const http = require('http');
-const socketio = require('socket.io');
-
-require('dotenv').config()
-require('./config/database.js')
-
+const http = require('http')
 const app = express();
-const server = http.createServer(app);
-const io = socketio(server);
+const cors = require('cors');
+const server = http.createServer(app)
+
+const io = require("socket.io")(server,{
+  cors: {
+    origin: "http://localhost:5000",
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
+})
+app.use(cors())
 
 let users = [];
 
@@ -28,30 +32,32 @@ const getUser = (userId)=>{
 }
 
 io.on("connection", (socket) => {
-  console.log("A user has connected")
   socket.on("send-user", userId=>{
     addUser(userId, socket.id)
+    console.log("users in server side", users)
     io.emit("get-users", users)
   });
 
   // send and get a message
   socket.on("send-message", ({senderId, receiverId, text})=>{
-    console.log("send-message fired")
     const receivedUser = getUser(receiverId);
+    console.log({senderId, text})
+    if (receivedUser) {
       io.to(receivedUser.socketId).emit("get-message", {
         senderId: senderId,
         text: text,
       })
-
+    } 
   })
 
   socket.on("disconnect", ()=>{
-    console.log("A user has disconnected")
     removeUser(socket.id)
     io.emit("get-users", users)
   })
 })
 
+require('dotenv').config()
+require('./config/database.js')
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -78,8 +84,8 @@ app.get('/*', function(req, res) {
 
 // Configure to use port 3001 instead of 3000 during
 // development to avoid collision with React's dev server
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 5000;
 
-app.listen(port, function() {
+server.listen(port, function() {
   console.log(`Express app running on port ${port}`)
 });
