@@ -28,16 +28,16 @@ Our users can:
      <td>Profile</td>
   </tr>
   <tr>
-    <td><img src="extra/signup.png" style="width:100%"></td>
-    <td><img src="extra/profile.png" style="width:100%"></td>
+    <td><img src="src/extra/signup.png" style="width:100%"></td>
+    <td><img src="src/extra/profile.png" style="width:100%"></td>
   </tr>
 <tr>
     <td>Decision Page</td>
      <td>Chat</td>
   </tr>
   <tr>
-    <td><img src="extra/chat.png" style="width:100%"></td>
-    <td><img src="extra/decision.png" style="width:100%"></td>
+    <td><img src="src/extra/chat.png" style="width:100%"></td>
+    <td><img src="src/extra/decision.png" style="width:100%"></td>
   </tr>
  </table>
 
