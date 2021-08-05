@@ -11,14 +11,12 @@ const interests = [
   { label: "Coding", value: 6 },
 ];
 
-export default class ProfilePageForm extends React.Component {
+export default class EditProfileForm extends React.Component {
 
   state = {
       profileData: this.props.profileData,
-      editedP: true,
+      interests: [],
 };
-
-
 
   handleChange = (e) => {
     e.preventDefault();
@@ -37,6 +35,7 @@ export default class ProfilePageForm extends React.Component {
 
   handleSubmit = async () => {
     try {
+      console.log("clicked edit fired", this.props.clickedEdit)
       let jwt = localStorage.getItem('token')
       await fetch("/api/users/profile/"+this.props.profileData._id+"/edit", {
         method: "POST",
@@ -44,6 +43,7 @@ export default class ProfilePageForm extends React.Component {
         body: JSON.stringify({bio: this.state.bio, interests: this.state.interests}) // <-- send this object to server
         })
         this.props.getProfile()
+        this.props.handleEdit(false)
         // window.location.reload(true);
     } catch (err) {
       console.error("Error:", err) // <-- log if error
@@ -70,7 +70,7 @@ export default class ProfilePageForm extends React.Component {
           placeholder={this.state.profileData.bio}></textarea>
         <br />
         Interests:
-        <Select name= "interests" placeholder={this.state.profileData.interests.map(i => <li>{i.label}</li>)}onChange={this.handleSelect} options={ interests } isMulti />
+        <Select name= "interests" placeholder={this.state.profileData.interests.map(i => <li>{i.label}</li>)} onChange={this.handleSelect} options={ interests } isMulti />
         
         <button className="submitFormBtn" onClick={this.handleSubmit}>Submit!</button>
       </div>

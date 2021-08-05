@@ -20,6 +20,7 @@ export default class App extends React.Component {
     tab: 0,
     deleted: false,
     clickedEdit: false,
+    friends: [],
   }
   toggle = (incoming) => {
   
@@ -28,9 +29,9 @@ export default class App extends React.Component {
     })
  
   }
-  handleEdit = async() => {
+  handleEdit = async (incoming) => {
     this.setState({
-          clickedEdit: true,
+          clickedEdit: incoming,
     })
 }
 
@@ -38,8 +39,7 @@ export default class App extends React.Component {
     this.setState({ user: incomingUserData})
   }
 
-
-  componentDidMount() {
+  grabUserData() {
     let token = localStorage.getItem('token')
     if (token) {
       const payload = JSON.parse(atob(token.split('.')[1])); // decode token
@@ -49,9 +49,14 @@ export default class App extends React.Component {
       } else { // token not expired! our user is still 'logged in'. Put them into state.
         let userDoc = payload.user // grab user details from token
         console.log("userDoc", userDoc)
-        this.setState({user: userDoc})      
+        console.log("User friends", userDoc.friends);
+        this.setState({user: userDoc, friends: userDoc.friends})      
       }
     }
+  }
+
+  componentDidMount() {
+    this.grabUserData();
   }
 
   getUser = async () => {
@@ -65,12 +70,13 @@ export default class App extends React.Component {
     this.setState({user: null})      
   }
 
-  handleDeleteFriend = async (userId, friendId) => {
+  handleDeleteFriend = async (userId, friendId, incoming_state_change) => {
     await axios.delete(`/api/users/${userId}/${friendId}`);
+    this.grabUserData();
     this.setState({
-      deleted: true
-  });
-  // window.location.reload(true);
+      deleted: incoming_state_change
+    });
+    window.location.reload(true);
   }
 
   render() {
@@ -100,7 +106,7 @@ export default class App extends React.Component {
         <Switch>
             <Route path={'/profile'} render={() => (
               <>
-                <ProfilePage tab={this.state.tab} toggle={this.toggle} deleted={this.state.deleted} handleDelete={this.handleDeleteFriend} allUsers={this.state.allUsers} clickedEdit={this.state.clickedEdit} handleEdit={this.handleEdit}/>
+                <ProfilePage tab={this.state.tab} toggle={this.toggle} handleDelete={this.handleDeleteFriend} allUsers={this.state.allUsers} clickedEdit={this.state.clickedEdit} handleEdit={this.handleEdit}/>
               </>
             )}/>
             <Route path={'/profile/form'} render={(props) => (
