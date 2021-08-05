@@ -11,7 +11,9 @@
       display: none;
 }
 
+.hide {
+  display: none;
+}
 .profileImage {
       width: 100px;
 }
-

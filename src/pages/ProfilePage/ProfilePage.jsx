@@ -2,8 +2,10 @@ import React from 'react';
 import ProfilePageForm from '../../components/ProfilePageForm/ProfilePageForm';
 import ProfileData from '../../components/ProfileData/ProfileData'
 import ImageUploader from 'react-images-upload';
-import { Link } from 'react-router-dom';
+
 import axios from 'axios'
+
+import 'reactjs-popup/dist/index.css';
 import "./ProfilePage.css"
 
 export default class ProfilePage extends React.Component {
@@ -14,6 +16,8 @@ export default class ProfilePage extends React.Component {
         imageUrl: "",
         photo: true,
         visible: false,
+        
+      
       }
  
       constructor(props) {
@@ -22,6 +26,7 @@ export default class ProfilePage extends React.Component {
          this.state = { pictures: []};
          this.onDrop = this.onDrop.bind(this);
          this.uploadImages = this.uploadImages.bind(this)
+         
     }
     
     onDrop = (picture) => {
@@ -32,7 +37,7 @@ export default class ProfilePage extends React.Component {
         });
       }
 
-    //with each image name we do axios calls (POST)
+
     uploadImages(){ 
       console.log(this.state.pictures)
       let uploadPromises = this.state.pictures.map(image => {
@@ -60,10 +65,7 @@ export default class ProfilePage extends React.Component {
           if (!fetchProfileDataResponse.ok) throw new Error("Couldn't fetch orders")
           let profile = await fetchProfileDataResponse.json() // <------- convert fetch response into a js object
           this.setState({ profileData: profile})
-      }
-
-      handleDeleteFriend = async (userId, friendId) => {
-            return await axios.delete(`/api/users/${userId}/${friendId}`);
+          
       }
 
       async componentDidMount() {
@@ -79,17 +81,30 @@ export default class ProfilePage extends React.Component {
             }
       }
 
-      render() {
-            return (
+  render() {
+        return (
             <div className="profileIndex">
-                  <h1 className="profileTitle">User Profile</h1>
-                  <h2 className="profileName"> Name: {this.state.userData?.name}</h2>
-                  <h2 className="profileEmail"> Email: {this.state.userData?.email}</h2>
-                  {this.state.userData?.friends.map(f =><><img className="profileImage" src={f.imageUrl}/><p>{f.name}<button className="xDelete" onClick={() => {this.handleDeleteFriend(this.state.userData._id, f.user)}}>X</button></p></>)} 
-                  {this.state.profileData ? 
+                <h1 className="profileTitle">User Profile</h1>
+                <h2 className="profileName"> Name: {this.state.userData?.name}</h2>
+                <h2 className="profileEmail"> Email: {this.state.userData?.email}</h2>
 
-                  <div className="photoUpload">
+
+                <button onClick = {() => {this.props.toggle(1)} }>Show</button>
+                {this.state.userData?.friends.map(f =>
+                <div className={this.props.tab === 0 ? 'hidden' : undefined }>
+      
+               <img className="profileImage" src={f.imageUrl}/>
+               <p>{f.name}<button className="xDelete" onClick={() => {this.props.handleDelete(this.state.userData._id, f.user)}}>X</button></p></div>)} 
+               <button onClick = {() => {this.props.toggle(0)} }>Hide</button>
+               
+
+                {this.state.profileData ? 
+               
+                <div className="photoUpload">
+                  
                   <img className="profileImg" src={`${this.state.profileData.imageUrl}?${new Date()}`} key={new Date().getTime()} />
+
+                  
                   <ProfileData getProfile={this.getProfile} profileData={this.state.profileData} friends={this.state.userData?.friends}/>
 
                   <ImageUploader
@@ -114,3 +129,4 @@ export default class ProfilePage extends React.Component {
             )
       }
 }
+    

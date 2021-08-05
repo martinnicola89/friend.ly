@@ -82,7 +82,7 @@ async function deleteFriend(req, res) {
         user.friends.splice(i, 1)
     }
     user.save();
-    res.status(200).json("delete friend!")
+    res.status(200).json(user)
   } catch(err) {
     res.status(400).json(err);
   }
