@@ -25,7 +25,7 @@ Our users can:
 <table>
   <tr>
     <td>Sign Up Form</td>
-     <td>Profile</td>
+     <td>Decision Page</td>
   </tr>
   <tr>
     <td><img src="src/extra/signup.png" style="width:100%"></td>
@@ -33,12 +33,13 @@ Our users can:
     
   </tr>
 <tr>
-    <td>Decision Page</td>
+    <td>Profile</td>
      <td>Chat</td>
   </tr>
   <tr>
-    <td><img src="src/extra/chat.png" style="width:100%"></td>
     <td><img src="src/extra/profile.png" style="width:100%"></td>
+    <td><img src="src/extra/chat.png" style="width:100%"></td>
+    
   </tr>
  </table>
 
