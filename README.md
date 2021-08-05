@@ -1,22 +1,15 @@
 # friendl-y
 
-> 
+> Why make friends in the old fashioned way. Use friend-ly!
 
 
 ### Overview 
 
 ```
-
+What are you waiting for?? Just start messaging!!
 
 ```
 
-
-
-Our users can:
-
-(1) Make amazing friends!
-(2) Start messaging right away!
-<br />
 
 
 
