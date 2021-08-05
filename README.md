@@ -24,22 +24,20 @@ Our users can:
 
 <table>
   <tr>
+    <td>Profile</td>
     <td>Sign Up Form</td>
-     <td>Profile</td>
   </tr>
   <tr>
-    <td><img src="src/extra/signup.png" style="width:100%"></td>
     <td><img src="src/extra/profile.png" style="width:100%"></td>
-    
+    <td><img src="src/extra/signup.png" style="width:100%"></td>
   </tr>
 <tr>
-    <td>Decision Page</td>
-     <td>Chat</td>
+    <td>Chat</td>
+    <td>Decision Page</td> 
   </tr>
   <tr>
-    <td><img src="src/extra/decision.png" style="width:100%"></td>
     <td><img src="src/extra/chat.png" style="width:100%"></td>
-    
+    <td><img src="src/extra/decision.png" style="width:100%"></td>
   </tr>
  </table>
 
