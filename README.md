@@ -29,7 +29,8 @@ Our users can:
   </tr>
   <tr>
     <td><img src="src/extra/signup.png" style="width:100%"></td>
-    <td><img src="src/extra/profile.png" style="width:100%"></td>
+    <td><img src="src/extra/decision.png" style="width:100%"></td>
+    
   </tr>
 <tr>
     <td>Decision Page</td>
@@ -37,7 +38,7 @@ Our users can:
   </tr>
   <tr>
     <td><img src="src/extra/chat.png" style="width:100%"></td>
-    <td><img src="src/extra/decision.png" style="width:100%"></td>
+    <td><img src="src/extra/profile.png" style="width:100%"></td>
   </tr>
  </table>
 
@@ -54,7 +55,7 @@ Our users can:
 
 ### Getting Started 
 
-Here is the **<a href="https://friendl-y.herokuapp.com/">link</a>** Bon Appétit
+Here is the **<a href="https://friendl-y.herokuapp.com/">link</a>** Have fun!
 
 Here is the **<a href="https://trello.com/b/dMWyO6GQ/friendly">link</a>**  to the Trello board which includes all the planning that went into creating this beautiful app. 
 
