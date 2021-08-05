@@ -17,7 +17,7 @@ export default function Messenger(props) {
     const socket = useRef();
     const scrollRef = useRef();
     // const ENDPOINT = 'https://friendl-y.herokuapp.com/'
-    const ENDPOINT = '/'
+    const ENDPOINT = 'ws://friendl-y.herokuapp.com:24699/socket.io/?EIO=4&transport=websocket'
 
     useEffect(()=>{
         socket.current = io(ENDPOINT);
