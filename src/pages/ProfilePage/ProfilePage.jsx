@@ -89,13 +89,13 @@ export default class ProfilePage extends React.Component {
                 <h2 className="profileEmail"> Email: {this.state.userData?.email}</h2>
 
 
-                <button onClick = {() => {this.props.toggle(1)} }>Show</button>
+                <button className="showBtn" onClick = {() => {this.props.toggle(1)} }>Show</button>
                 {this.state.userData?.friends.map(f =>
                 <div className={this.props.tab === 0 ? 'hidden' : undefined }>
       
                <img className="profileImage" src={f.imageUrl}/>
                <p>{f.name}<button className="xDelete" onClick={() => {this.props.handleDelete(this.state.userData._id, f.user)}}>X</button></p></div>)} 
-               <button onClick = {() => {this.props.toggle(0)} }>Hide</button>
+               <button className="hideBtn" onClick = {() => {this.props.toggle(0)} }>Hide</button>
                
 
                 {this.state.profileData ? 
@@ -108,6 +108,7 @@ export default class ProfilePage extends React.Component {
                   <ProfileData getProfile={this.getProfile} profileData={this.state.profileData} friends={this.state.userData?.friends}/>
 
                   <ImageUploader
+                        className="imager"
                         key="image-uploader"
                         withIcon={false}
                         singleImage={true}
@@ -119,7 +120,7 @@ export default class ProfilePage extends React.Component {
                         maxFileSize={5242880}
                         />
 
-                  <button  className={this.state.visible ? undefined : 'hidden'} onClick={() => {this.uploadImages()}}>Looks Good</button>
+                  <button className={this.state.visible ? 'confirmBtn' : 'hidden'} onClick={() => {this.uploadImages()}}>Looks Good</button>
                   </div>
                   
                   :

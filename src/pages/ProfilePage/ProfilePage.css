@@ -12,8 +12,40 @@
 }
 
 .hide {
-  display: none;
+      display: none;
 }
 .profileImage {
       width: 100px;
+}
+
+
+.showBtn{
+      margin: 1rem 1rem ;
+      padding: .8em;
+      border: none;
+      border-radius: 10px;
+}
+
+.hideBtn{
+      margin: 1rem 1rem ;
+      padding: .8em;
+      border: none;
+      border-radius: 10px;
+}
+
+.imager{
+      display: flex;
+      width: 86rem;
+      margin: 1rem ;
+}
+
+.fileContainer{
+      background: none;
+}
+
+.confirmBtn{
+      margin: 1rem 1rem ;
+      padding: .8em;
+      border: none;
+      border-radius: 10px;
 }
