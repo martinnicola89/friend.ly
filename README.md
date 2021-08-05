@@ -6,11 +6,16 @@
 ### Overview 
 
 ```
-What are you waiting for?? Just start messaging!!
+
+What are you waiting for??
+
+- Sign Up
+- Make a Profile
+- Find Friends
+- Get Connecting!!!!
+
 
 ```
-
-
 
 
 ### Screenshots
