@@ -4,8 +4,6 @@
 }
 
 .editBtn {
-  /* margin: 2rem;
-  padding: 0.7rem; */
   margin: 1rem 1rem;
   padding: 0.8em;
   border: none;
@@ -28,4 +26,9 @@
 .bioBlock {
   margin-top: 20px;
   word-break: break-all;
+}
+
+.editProfileForm {
+  display: flex;
+  justify-content: center;
 }
