@@ -63,54 +63,54 @@ export default class ProfilePage extends React.Component {
       }
 
       handleDeleteFriend = async (userId, friendId) => {
-        return await axios.delete(`/api/users/${userId}/${friendId}`);
+            return await axios.delete(`/api/users/${userId}/${friendId}`);
       }
 
       async componentDidMount() {
-        try {
-          let jwt = localStorage.getItem('token')
-          let fetchUserDataResponse = await fetch('/api/users/userdata', {headers: {'Authorization': 'Bearer ' + jwt}})
-          if (!fetchUserDataResponse.ok) throw new Error("Couldn't fetch orders")
+      try {
+            let jwt = localStorage.getItem('token')
+            let fetchUserDataResponse = await fetch('/api/users/userdata', {headers: {'Authorization': 'Bearer ' + jwt}})
+            if (!fetchUserDataResponse.ok) throw new Error("Couldn't fetch orders")
           let userD = await fetchUserDataResponse.json() // <------- convert fetch response into a js object
-          this.setState({ userData: userD})
-          this.getProfile();        
-        } catch (err) {
-          console.error('ERROR:', err) // <-- log if error
-        }
+            this.setState({ userData: userD})
+            this.getProfile();        
+            } catch (err) {
+                  console.error('ERROR:', err) // <-- log if error
+            }
       }
 
-    render() {
-        return (
-            <>
-                <h1>profile</h1>
-                <h2>{this.state.userData?.name}</h2>
-                <h2>{this.state.userData?.email}</h2>
-                {this.state.userData?.friends.map(f =><><img className="profileImage" src={f.imageUrl}/><p>{f.name}<button className="xDelete" onClick={() => {this.handleDeleteFriend(this.state.userData._id, f.user)}}>X</button></p></>)} 
-                {this.state.profileData ? 
-               
-                <div className="photoUpload">
+      render() {
+            return (
+            <div className="profileIndex">
+                  <h1 className="profileTitle">User Profile</h1>
+                  <h2 className="profileName"> Name: {this.state.userData?.name}</h2>
+                  <h2 className="profileEmail"> Email: {this.state.userData?.email}</h2>
+                  {this.state.userData?.friends.map(f =><><img className="profileImage" src={f.imageUrl}/><p>{f.name}<button className="xDelete" onClick={() => {this.handleDeleteFriend(this.state.userData._id, f.user)}}>X</button></p></>)} 
+                  {this.state.profileData ? 
+
+                  <div className="photoUpload">
                   <img className="profileImg" src={`${this.state.profileData.imageUrl}?${new Date()}`} key={new Date().getTime()} />
                   <ProfileData getProfile={this.getProfile} profileData={this.state.profileData} friends={this.state.userData?.friends}/>
-              
+
                   <ImageUploader
-                    key="image-uploader"
-                    withIcon={false}
-                    singleImage={true}
-                    withPreview={this.state.photo}
-                    label=""
-                    buttonText="Change Profile Picture"
-                    onChange={this.onDrop}
-                    imgExtension={['.jpg', '.png', '.jpeg']}
-                    maxFileSize={5242880}
-                    />
+                        key="image-uploader"
+                        withIcon={false}
+                        singleImage={true}
+                        withPreview={this.state.photo}
+                        label=""
+                        buttonText="Change Profile Picture"
+                        onChange={this.onDrop}
+                        imgExtension={['.jpg', '.png', '.jpeg']}
+                        maxFileSize={5242880}
+                        />
 
                   <button  className={this.state.visible ? undefined : 'hidden'} onClick={() => {this.uploadImages()}}>Looks Good</button>
                   </div>
                   
-                :
-                <ProfilePageForm getProfile={this.getProfile}/>
-                }
-            </>
-        )
-    }
+                  :
+                  <ProfilePageForm getProfile={this.getProfile}/>
+                  }
+            </div>
+            )
+      }
 }

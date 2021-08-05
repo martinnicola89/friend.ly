@@ -8,9 +8,10 @@
 }
 
 body {
-      background: linear-gradient(45deg, #f56960, #9cf6f6);
+      background: linear-gradient(45deg, #f56960, #f3c98b);
       height: 100vh;
       font-family: 'Montserrat', sans-serif;
+      background-repeat: none;
 }
 
 .form-container {
