@@ -12,34 +12,62 @@
 }
 
 .yes{
-      padding: .8em;
+      margin:2rem 2rem ;
+      padding: 1rem;
       border: none;
       border-radius: 10px;
 }
 
 .no{
-      margin-right: 40px;
-      padding: .8em;
+      margin: 2rem 2rem;
+      padding: 1rem;
       border: none;
       border-radius: 10px;
 }
 
 .yes:hover{
-      background: rgba(255,255,255,0.1);
+      color: white;
+      background: black;
       box-shadow: 4px 4px 60px 8px #f59608;
 }
 
 .no:hover{
-      background: rgba(255,255,255,0.1);
+      color: white;
+      background: black;
       box-shadow: 4px 4px 60px 8px #f59608;
 }
 
 .decisionPN{
-      background: white;
+      background: none;
       padding: 3em;
       width: 1000px;
       margin-left: 219px;
       height: 30vh;
       border-radius: 20px;
-     
+}
+
+.userBio{
+      width: 15rem;
+      padding: 2rem;
+      border: 1px solid #f3c98b;
+      background: #f3c98b;
+      margin-left: 37rem;
+      margin-top: 2rem;
+      border-radius: 15px;
+}
+
+.userInterests{
+      padding: 2rem;
+}
+
+.interestList{
+      list-style-type: none;
+      margin: 1rem 1rem ;
+      padding: .8em;
+      border: none;
+      border-radius: 10px;
+}
+.arrowBtn{
+      background:none;
+      border-radius: 10px;
 }
