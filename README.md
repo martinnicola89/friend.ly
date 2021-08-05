@@ -10,7 +10,7 @@
 What are you waiting for??
 
 - Sign Up
-- Make a Profile
+- Create a Profile
 - Find Friends
 - Get Connecting!!!!
 
