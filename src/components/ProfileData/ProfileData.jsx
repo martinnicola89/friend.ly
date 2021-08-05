@@ -9,12 +9,14 @@ export default function ProfileData (props) {
       return(
             <> 
                   {props.clickedEdit ? 
+                        <div className="editProfileForm">
                               <EditProfileForm handleEdit={props.handleEdit} getProfile={props.getProfile} profileData={props.profileData}/>
+                        </div>
                               :
                               <>
                                     <div className='bioIndex'>
                                           <h2>Bio: </h2>
-                                          <p>{props.profileData.bio}</p>
+                                          <p className="bioBlock">{props.profileData.bio}</p>
                                     </div>
                                     <div className='interestIndex'>
                                           <h2>Interests: </h2>

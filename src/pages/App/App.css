@@ -37,52 +37,52 @@
   }
 }
 
-.nav-wrapper{
-      display: flex;
-      max-height: 200px;
-      height: 40px;
-      padding: 25px;
-      align-items: center;
-      justify-content: space-between;
-      background-color: #9cf6f6;
+.nav-wrapper {
+  display: flex;
+  max-height: 200px;
+  height: 40px;
+  padding: 25px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #9cf6f6;
 }
 
-.home{
-      text-decoration: none;
-      color: black;
+.home {
+  text-decoration: none;
+  color: black;
 }
 
-.profile{
-      text-decoration: none;
-      color: black;
+.profile {
+  text-decoration: none;
+  color: black;
 }
 
-.logout{
-      background-color: #f3c98b;
-      padding: .8em;
-      border: none;
-      border-radius: 10px;
-      box-shadow: 4px 4px 60px rgba(0,0,0,0.2);
-      font-weight: 500;
-      transition: all 0.2s ease-in-out;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-      color:black;
+.logout {
+  background-color: #f3c98b;
+  padding: 0.8em;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 4px 4px 60px rgba(0, 0, 0, 0.2);
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  color: black;
 }
 
-.logoutBtn{
-      display: flex;
-      justify-content: flex-end;
+.logoutBtn {
+  display: flex;
+  justify-content: flex-end;
 }
 
 #messengerLogo {
   width: 35px;
   align-content: center;
-  padding-left: .6rem;
+  padding-left: 0.6rem;
 }
 
-#homeLogo{
+#homeLogo {
   width: 35px;
   align-content: center;
-  padding-left: .6rem;
-  margin-bottom: .3rem;
+  padding-left: 0.6rem;
+  margin-bottom: 0.3rem;
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import "./DecisionPage.css"
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import axios from 'axios';
-let arrows = { color: "#f3c98b", fontSize: "4em"};
+let arrows = { color: "#f3c98b", fontSize: "4em", borderRadius: "50px"};
 export default class DecisionPage extends React.Component {
     state = {
         currentUser: {},
@@ -84,7 +84,7 @@ export default class DecisionPage extends React.Component {
                             <div className="decisionPN">
                                   <img className="userPhoto" src={this.state.currentProfile.imageUrl} /> 
                                   <h1 className="userName">{this.state.currentProfile.name}</h1>
-                                  <button onClick={() => this.handleClick(0)} ><FiChevronDown className="arrowBtn"  style={arrows}/></button>
+                                 <img className="arrowBtnDown" src="https://peakmind.in/corporate/images/source.gif" onClick={() => this.handleClick(0)}/>
                                   <div className="yes-no">
                                         <button className="no" onClick={()=>this.handleNoSwipe(this.state.currentProfile)}>NO</button>
                                         <button className="yes" onClick={()=>this.handleYesSwipe(this.state.currentProfile)}>YES</button>
@@ -93,10 +93,10 @@ export default class DecisionPage extends React.Component {
                            :
                                   <div>
                                           <div className="bioWrapper">
-                                                <h1 className="userBio">Bio:{this.state.currentProfile.bio}</h1>
+                                                <h3 className="userBio">Bio:</h3><p>{this.state.currentProfile.bio}</p>
                                           </div>
                                     <h1 className="userInterests">Interests:{this.state.currentProfile.interests.map(i => <button className="interestList">{i.label}</button>)}</h1>
-                                                <button onClick={() => this.handleClick(1)}><FiChevronUp className="arrowBtn" style={arrows}/></button>
+                                      <img className="arrowBtnUp" src="https://peakmind.in/corporate/images/source.gif" onClick={() => this.handleClick(1)}/>
                                   </div>                  
     }
                     </div>

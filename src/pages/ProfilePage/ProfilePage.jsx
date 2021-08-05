@@ -85,19 +85,18 @@ export default class ProfilePage extends React.Component {
   render() {
         return (
             <div className="profileIndex">
-                <h1 className="profileTitle">User Profile</h1>
-                <h2 className="profileName"> Name: {this.state.userData?.name}</h2>
-                <h2 className="profileEmail"> Email: {this.state.userData?.email}</h2>
-
-
-                <button className="showBtn" onClick = {() => {this.props.toggle(1)} }>Show</button>
-                {this.state.userData?.friends.map(f =>
+                <h2 className="profileName">{this.state.userData?.name}</h2>
+                <button className="showBtn" onClick = {() => {this.props.toggle(1)} }>Friend List</button>
                 <div className={this.props.tab === 0 ? 'hidden' : undefined }>
-      
-               <img className="profileImage" src={f.imageUrl}/>
-               <p>{f.name}<button className="xDelete" onClick={() => {this.props.handleDelete(this.state.userData._id, f.user, true)}}>X</button></p></div>)} 
-               <button className="hideBtn" onClick = {() => {this.props.toggle(0)} }>Hide</button>
-               
+                      {this.state.userData?.friends.map(f => 
+                      <div className="friendList">
+                        <img className="profileImage" src={f.imageUrl}/>
+                        <p className="friendName">{f.name}<button className="xDelete" onClick={() => {this.props.handleDelete(this.state.userData._id, f.user)}}>X</button></p>
+                      </div>
+                      )}
+
+                  <button className="hideBtn" onClick = {() => {this.props.toggle(0)} }>Hide Friends</button> 
+                </div>
 
                 {this.state.profileData ? 
                
@@ -106,7 +105,6 @@ export default class ProfilePage extends React.Component {
                   <img className="profileImg" src={`${this.state.profileData.imageUrl}?${new Date()}`} key={new Date().getTime()} />
 
                   
-                  <ProfileData handleEdit={this.props.handleEdit} getProfile={this.getProfile} profileData={this.state.profileData} friends={this.state.userData?.friends} handleEdit={this.props.handleEdit} clickedEdit={this.props.clickedEdit}/>
 
                   <ImageUploader
                         className="imager"
@@ -122,10 +120,16 @@ export default class ProfilePage extends React.Component {
                         />
 
                   <button className={this.state.visible ? 'confirmBtn' : 'hidden'} onClick={() => {this.uploadImages()}}>Looks Good</button>
+                  
+                  <ProfileData getProfile={this.getProfile} profileData={this.state.profileData} friends={this.state.userData?.friends} handleEdit={this.props.handleEdit} clickedEdit={this.props.clickedEdit}/>
+
                   </div>
                   
+                  
                   :
-                  <ProfilePageForm getProfile={this.getProfile}/>
+                  <div className="profileFormWrap">
+                    <ProfilePageForm className="photoUploadForm" getProfile={this.getProfile}/>
+                  </div>
                   }
             </div>
             )
