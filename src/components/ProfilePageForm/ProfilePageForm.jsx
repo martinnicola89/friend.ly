@@ -53,12 +53,15 @@ export default class ProfilePageForm extends Component {
     return(
       <div className="profileForm">
         <hr />
-        Bio:
+        <h2 className="title-name">Update bio</h2>
         <textarea
-          rows="2"
-          name="bio"
-          onChange={this.handleChange}
-          value={this.state.bio}></textarea>
+            placeholder="BIO"
+            rows="5"
+            cols="53"
+            name='bio'
+            className="bio"
+            onChange={this.handleChange}
+            value={this.state.bio}></textarea>
         <br />
         Interests:
         <Select name= "interests" onChange={this.handleSelect} options={ interests } isMulti />

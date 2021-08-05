@@ -4,7 +4,6 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const http = require('http');
 const socketio = require('socket.io');
-const cors = require('cors');
 
 require('dotenv').config()
 require('./config/database.js')
@@ -13,25 +12,23 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-
-app.use(cors());
-
 let users = [];
 
 const addUser = (userId,socketId) => {
   !users.some(user=>user.userId === userId) &&
-    users.push({'userId': userId, 'socketId': socketId});
+    users.push({userId: userId, socketId: socketId});
 }
 
 const removeUser = (socketId) => {
-  users = users.filter(user=>user['socketId'] !== socketId)
+  users = users.filter(user=>user.socketId !== socketId)
 }
 
 const getUser = (userId)=>{
-  return users.find(user=>user['userId'] === userId)
+  return users.find(user=>user.userId === userId)
 }
 
 io.on("connection", (socket) => {
+  console.log("A user has connected")
   socket.on("send-user", userId=>{
     addUser(userId, socket.id)
     io.emit("get-users", users)
@@ -39,23 +36,17 @@ io.on("connection", (socket) => {
 
   // send and get a message
   socket.on("send-message", ({senderId, receiverId, text})=>{
-
+    console.log("send-message fired")
     const receivedUser = getUser(receiverId);
-    if (receivedUser) {
-      io.to(receivedUser['socketId']).emit("get-message", {
-        'senderId': senderId,
-        'text': text,
+      io.to(receivedUser.socketId).emit("get-message", {
+        senderId: senderId,
+        text: text,
       })
-    } else {
-      const user = getUser(senderId);
-      io.to(user['socketId']).emit("get-message", {
-        'receiverId': receiverId,
-        'text': text,
-      })
-    }
+
   })
 
   socket.on("disconnect", ()=>{
+    console.log("A user has disconnected")
     removeUser(socket.id)
     io.emit("get-users", users)
   })
