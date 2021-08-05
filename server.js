@@ -7,7 +7,7 @@ const app = express();
 const cors = require('cors');
 const server = http.createServer(app)
 
-const io = require("socket.io")(24699,{
+const io = require("socket.io")({
   cors: {
     origin: "https://friendly.herokuapp.com",
     methods: ["GET", "POST"],
@@ -84,7 +84,7 @@ app.get('/*', function(req, res) {
 
 // Configure to use port 3001 instead of 3000 during
 // development to avoid collision with React's dev server
-const port = process.env.PORT || 433;
+const port = process.env.PORT || 5000;
 
 server.listen(port, function() {
   console.log(`Express app running on port ${port}`)
