@@ -1,6 +1,7 @@
 
 import Select from 'react-select';
 import React from 'react';
+import './EditProfileForm.css'
 
 const interests = [
   { label: "Cars", value: 1 },
@@ -64,10 +65,12 @@ export default class ProfilePageForm extends React.Component {
         <hr />
         Bio:
         <textarea
-          rows="2"
-          name="bio"
-          onChange={this.handleChange}
-          placeholder={this.state.profileData.bio}></textarea>
+            className="bioArea"
+            rows="5"
+            cols="53"
+            name="bio"
+            onChange={this.handleChange}
+            placeholder={this.state.profileData.bio}></textarea>
         <br />
         Interests:
         <Select name= "interests" placeholder={this.state.profileData.interests.map(i => <li>{i.label}</li>)}onChange={this.handleSelect} options={ interests } isMulti />
