@@ -1,7 +1,17 @@
+.profileTitle{
+      padding: 1.2rem;
+      
+}
+
+.profileEmail{
+      padding: 1.2rem;
+}
+
 .hidden {
-  display: none;
+      display: none;
 }
 
 .profileImage {
-  width: 100px;
+      width: 100px;
 }
+
