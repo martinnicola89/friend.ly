@@ -2,21 +2,14 @@ import React from "react"
 import "./ProfileData.css"
 import EditProfileForm from "../EditProfileForm/EditProfileForm.jsx"
 
-export default class ProfileData extends React.Component {
-      state = {
-            clickedEdit: false,
-      }
-
-      handleEdit = async() => {
-            this.setState({
-                  clickedEdit:  true,
-            })
-      }
-      render(){
+export default function ProfileData (props) {
+      
+      
+     
       return(
             <> 
-                  {this.state.clickedEdit ? 
-                              <EditProfileForm getProfile={this.props.getProfile} profileData={this.props.profileData}/>
+                  {props.clickedEdit ? 
+                              <EditProfileForm getProfile={props.getProfile} profileData={props.profileData}/>
                               :
                               <>
                                     <div className='bioIndex'>
@@ -33,5 +26,5 @@ export default class ProfileData extends React.Component {
                         }
             </>
             )     
-      }
+      
 }
