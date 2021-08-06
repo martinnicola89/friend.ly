@@ -36,11 +36,15 @@
   cursor: pointer;
 }
 
+.swipe-form {
+  display: flex;
+  justify-content: center;
+}
+
 .decisionPN {
   background: none;
   padding: 3em;
   width: 1000px;
-  margin-left: 219px;
   height: 30vh;
   border-radius: 20px;
 }

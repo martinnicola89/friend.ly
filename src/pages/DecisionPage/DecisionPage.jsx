@@ -89,7 +89,7 @@ export default class DecisionPage extends React.Component {
                                         <button className="no" onClick={()=>this.handleNoSwipe(this.state.currentProfile)}>NO</button>
                                         <button className="yes" onClick={()=>this.handleYesSwipe(this.state.currentProfile)}>YES</button>
                                   </div>
-                          </div>
+                            </div>
                            :
                                   <div>
                                           <div className="bioWrapper">

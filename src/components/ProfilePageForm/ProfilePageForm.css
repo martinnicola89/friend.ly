@@ -13,6 +13,11 @@
   color: black;
 }
 
+.profileFormWrap {
+  display: flex;
+  justify-content: center;
+}
+
 .submitFormBtn {
   margin-top: 20px;
   background: #9cf6f6;
