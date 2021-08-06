@@ -70,3 +70,4 @@ Here is the **<a href="https://trello.com/b/dMWyO6GQ/friendly">link</a>**  to th
 - Add a "swipe" interface for picking friends.
 - Some styling fixes. 
 
+Credits: Snippets of SocketIO code from client side and server side by [Lama Dev](https://github.com/safak/youtube/tree/chat-app) was used, as well as some styling for the client side components: Messenger, Conversation, Message.
