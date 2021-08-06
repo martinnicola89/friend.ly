@@ -40,7 +40,7 @@ What are you waiting for??
     
   </tr>
   <tr>
-    <td><img src="src/extra/nick.png" style="width:100%"></td>
+    <td><img src="src/extra/marty.png" style="width:100%"></td>
     <td><img src="src/extra/decision.png" style="width:100%"></td>
     <td><img src="src/extra/chat.png" style="width:100%"></td>
   </tr>
