@@ -4,16 +4,10 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const http = require('http')
 const app = express();
+const socketIO = require('socket.io')
 const cors = require('cors');
 const server = http.createServer(app)
-
-const io = require("socket.io")({
-  cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
-    credentials: true,
-  },
-})
+const io = socketIO(server)
 app.use(cors())
 
 let users = [];

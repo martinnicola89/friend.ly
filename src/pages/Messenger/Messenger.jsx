@@ -16,10 +16,9 @@ export default function Messenger(props) {
     const [onlineUsers, setOnlineUsers] = useState([]);
     const socket = useRef();
     const scrollRef = useRef();
-    // const ENDPOINT = 'ws://friendl-y.herokuapp.com/socket.io/?EIO=4&transport=websocket'
-    const ENDPOINT = '/'
+
     useEffect(()=>{
-        socket.current = io(ENDPOINT);
+        socket.current = io();
 
         socket.current.on("get-message", data=>{
             setArrivalMessage({
@@ -95,7 +94,6 @@ export default function Messenger(props) {
             console.log(err);
         }
     };
-
 
     useEffect(()=>{
         scrollRef.current?.scrollIntoView({behavior:"smooth"})
