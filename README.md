@@ -23,20 +23,24 @@ What are you waiting for??
 <table>
   <tr>
     <td>Sign Up Form</td>
+    <td>Edit</td>
     <td>Profile</td>
     
   </tr>
   <tr>
     <td><img src="src/extra/signup.png" style="width:100%"></td>
+    <td><img src="src/extra/edit.png" style="width:100%"></td>
     <td><img src="src/extra/profile.png" style="width:100%"></td>
     
   </tr>
 <tr>
+    <td>Upload Photo</td> 
     <td>Decision Page</td> 
     <td>Chat</td>
     
   </tr>
   <tr>
+    <td><img src="src/extra/nick.png" style="width:100%"></td>
     <td><img src="src/extra/decision.png" style="width:100%"></td>
     <td><img src="src/extra/chat.png" style="width:100%"></td>
   </tr>
